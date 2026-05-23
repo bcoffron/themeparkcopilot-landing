@@ -2,3096 +2,564 @@
 
 <html lang="en">
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Theme Park Co-Pilot — Dark Version</title>
-
-<meta name="description" content="The AI-powered theme park guide that builds your plan, watches live wait times, and reroutes your family all day — so you ride more, wait less, and enjoy the moments you came for.">
-
-<link rel="icon" type="image/png" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
-
-  <link rel="apple-touch-icon" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700;1,900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-
-/* ── RESET ── */
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body { font-family: 'Outfit', sans-serif; background: #071E25; color: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-
-input, button { font-family: inherit; }
-
-input::placeholder { color: rgba(255,255,255,0.3); }
-
-img { display: block; max-width: 100%; }
-
-/* ── NAV ── */
-
-.nav {
-
-  position: sticky; top: 0; z-index: 100;
-
-  background: rgba(7,30,37,0.97); backdrop-filter: blur(14px);
-
-  height: 56px; display: flex; align-items: center; justify-content: space-between;
-
-  padding: 0 48px; border-bottom: 1px solid rgba(255,255,255,0.07);
-
-}
-
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-
-.nav-logo img { height: 32px; width: 32px; border-radius: 7px; object-fit: cover; flex-shrink: 0; }
-
-.nav-wm { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: -.3px; }
-
-.nav-wm span { color: #F5A623; }
-
-.nav-links { display: flex; gap: 28px; }
-
-.nav-links a { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; transition: color .15s; }
-
-.nav-links a:hover { color: #fff; }
-
-.nav-cta {
-
-  background: #F5A623; color: #071E25; border: none; border-radius: 22px;
-
-  padding: 9px 22px; font-size: 12px; font-weight: 800; cursor: pointer;
-
-}
-
-/* ── HERO: photo left, copy + phone right ── */
-
-.hero {
-
-  display: grid;
-
-  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr) minmax(248px, 320px);
-
-  min-height: calc(100vh - 56px);
-
-  max-width: 1500px; margin-inline: auto;
-
-}
-
-.hero-photo { position: relative; overflow: hidden; }
-
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
-
-.hero-photo::after {
-
-  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 80px;
-
-  background: linear-gradient(to right, transparent, #071E25);
-
-}
-
-.hero-copy {
-
-  padding: 52px 44px 52px 44px;
-
-  display: flex; flex-direction: column; justify-content: center;
-
-  border-right: 1px solid rgba(255,255,255,0.05);
-
-}
-
-.hero-lockup {
-
-  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
-
-}
-
-.hero-lockup-img {
-
-  width: 56px; height: 56px; border-radius: 13px;
-
-  object-fit: cover; flex-shrink: 0;
-
-}
-
-.hero-lockup-text { }
-
-.hero-lockup-name {
-
-  font-family: 'Outfit', sans-serif;
-
-  font-size: 20px; font-weight: 900; color: #fff;
-
-  letter-spacing: -.4px; line-height: 1;
-
-}
-
-.hero-lockup-name span { color: #F5A623; }
-
-.hero-lockup-tag {
-
-  font-size: 9px; font-weight: 700; color: rgba(245,166,35,0.55);
-
-  letter-spacing: .18em; text-transform: uppercase; margin-top: 4px;
-
-}
-
-.hero-eyebrow {
-
-  font-size: 9px; font-weight: 700; color: rgba(245,166,35,0.55);
-
-  letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px;
-
-  display: flex; align-items: center; gap: 8px;
-
-}
-
-.hero-eyebrow::before { content: ''; width: 16px; height: 1px; background: rgba(245,166,35,0.4); }
-
-.hero-h {
-
-  font-family: 'Fraunces', serif; font-size: clamp(34px, 4.6vw, 58px); line-height: .94;
-
-  color: #fff; margin-bottom: 14px; letter-spacing: -.5px;
-
-}
-
-.hero-h em { font-style: italic; color: #F5A623; }
-
-.hero-tagline {
-
-  font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.72;
-
-  max-width: 400px; margin-bottom: 24px;
-
-}
-
-.hero-email {
-
-  display: flex; gap: 8px; max-width: 400px; margin-bottom: 8px;
-
-}
-
-.hero-email input {
-
-  flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
-
-  border-radius: 10px; padding: 13px 15px; font-size: 14px; color: #fff; outline: none;
-
-}
-
-.hero-email input:focus { border-color: rgba(245,166,35,0.5); }
-
-.hero-fine { font-size: 10px; color: rgba(255,255,255,0.22); }
-
-/* Phone floats bottom-right of copy panel */
-
-.phone-col {
-
-  background: rgba(0,0,0,0.25);
-
-  border-left: 1px solid rgba(255,255,255,0.07);
-
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-
-  padding: 32px 24px;
-
-}
-
-.phone-label { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: .18em; text-transform: uppercase; }
-
-.phone-shell {
-
-  position: relative; flex-shrink: 0;
-
-  width: clamp(200px, 18vw, 236px); aspect-ratio: 9 / 19.3;
-
-  background: linear-gradient(150deg, #24292f 0%, #0b0e12 62%);
-
-  border-radius: 38px; padding: 7px;
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  box-shadow: 0 34px 72px rgba(0,0,0,0.7), 0 4px 14px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
-
-  display: flex; flex-direction: column;
-
-}
-
-.phone-inner {
-
-  flex: 1; min-height: 0; overflow: hidden;
-
-  border-radius: 30px; background: #071E25;
-
-  display: flex; flex-direction: column;
-
-  container-type: inline-size; position: relative;
-
-  transition: opacity .2s;
-
-}
-
-.phone-notch {
-
-  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-
-  width: 32%; height: 13px; background: #000; border-radius: 999px; z-index: 6;
-
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-
-}
-
-/* ── STATS STRIP ── */
-
-.stats {
-
-  background: #1A6860; display: flex; padding: 18px max(64px, calc((100% - 1200px) / 2));
-
-  border-top: 1px solid rgba(255,255,255,0.06);
-
-}
-
-.st { flex: 1; text-align: center; padding: 0 16px; border-right: 1px solid rgba(255,255,255,0.15); }
-
-.st:last-child { border-right: none; }
-
-.st-n { font-size: 24px; font-weight: 900; color: #fff; line-height: 1; }
-
-.st-l { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 2px; }
-
-/* ── PROBLEM STRIP (new) ── */
-
-.problems {
-
-  background: #0A1820; padding: 56px 64px; border-bottom: 1px solid rgba(255,255,255,0.05);
-
-}
-
-.problems-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
-
-.prob-eye {
-
-  font-size: 9px; font-weight: 700; color: rgba(245,166,35,0.5);
-
-  text-transform: uppercase; letter-spacing: .2em; margin-bottom: 14px;
-
-}
-
-.prob-h {
-
-  font-family: 'Fraunces', serif; font-size: 32px; color: #fff;
-
-  line-height: 1.15; margin-bottom: 8px;
-
-}
-
-.prob-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 36px; }
-
-.prob-grid {
-
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
-
-  text-align: left;
-
-}
-
-.prob-item {
-
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
-
-  border-radius: 10px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px;
-
-}
-
-.prob-icon {
-
-  width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
-
-  background: rgba(200,96,48,0.15); display: flex; align-items: center; justify-content: center;
-
-}
-
-.prob-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
-
-.prob-text strong { color: rgba(255,255,255,0.8); font-weight: 700; display: block; margin-bottom: 2px; }
-
-/* ── FEATURE CARDS (from A) ── */
-
-.features { background: linear-gradient(160deg, #FFFDF8 0%, #F5F0E8 100%); padding: 72px 64px; position: relative; overflow: hidden; }
-
-.features-inner { max-width: 1100px; margin: 0 auto; }
-
-.feat-eye { font-size: 9px; font-weight: 700; color: #4A7A7C; text-transform: uppercase; letter-spacing: .18em; margin-bottom: 8px; }
-
-.feat-h {
-
-  font-family: 'Fraunces', serif; font-size: 36px; color: #071E25;
-
-  margin-bottom: 36px; line-height: 1.1; letter-spacing: -.2px;
-
-}
-
-.feat-h em { font-style: italic; color: #C86030; }
-
-.feat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
-
-.fc {
-
-  background: #fff; border-radius: 16px; padding: 28px;
-
-  border: 1px solid rgba(7,30,37,0.07); position: relative; overflow: hidden;
-
-  box-shadow: 0 2px 12px rgba(7,30,37,0.04);
-
-  transition: box-shadow .2s, transform .2s;
-
-}
-
-.fc:hover { box-shadow: 0 8px 32px rgba(7,30,37,0.1); transform: translateY(-2px); }
-
-.fc::before {
-
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-
-}
-
-.fc.c1::before { background: linear-gradient(90deg, #1A6860, #8AACAE); }
-
-.fc.c2::before { background: linear-gradient(90deg, #C86030, #ECA050); }
-
-.fc.c3::before { background: linear-gradient(90deg, #F5A623, #ECA050); }
-
-.fc-icon {
-
-  width: 44px; height: 44px; border-radius: 11px;
-
-  display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
-
-}
-
-.c1 .fc-icon { background: #E0F0EE; }
-
-.c2 .fc-icon { background: rgba(200,96,48,0.1); }
-
-.c3 .fc-icon { background: rgba(245,166,35,0.12); }
-
-.fc h3 { font-size: 14px; font-weight: 800; color: #071E25; margin-bottom: 6px; }
-
-.fc p { font-size: 12px; color: #4A7A7C; line-height: 1.65; margin-bottom: 12px; }
-
-.fc-q {
-
-  font-size: 11px; font-style: italic; color: #4A7A7C;
-
-  padding: 8px 10px; border-radius: 7px; border-left: 2px solid;
-
-}
-
-.c1 .fc-q { background: #EEF5F4; border-left-color: #1A6860; }
-
-.c2 .fc-q { background: #FFF4EE; border-left-color: #C86030; }
-
-.c3 .fc-q { background: #FFF8EE; border-left-color: #F5A623; }
-
-/* ── NARRATIVE STORY PANELS (from D) ── */
-
-.narrative { display: grid; grid-template-columns: 1fr 280px; max-width: 1440px; margin-inline: auto; }
-
-.story-panels { }
-
-.sp {
-
-  min-height: 480px; padding: 72px 72px 72px 64px;
-
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-
-  display: flex; flex-direction: column; justify-content: center;
-
-}
-
-.sp.dark { background: #071E25; }
-
-.sp.teal { background: #082028; }
-
-.sp.amber { background: #091C22; }
-
-.sp.coral { background: #0C1F28; position: relative; overflow: hidden; }
-
-.sp-tag {
-
-  font-size: 9px; font-weight: 700; color: rgba(245,166,35,0.55);
-
-  letter-spacing: .22em; text-transform: uppercase; margin-bottom: 14px;
-
-}
-
-.sp-h {
-
-  font-family: 'Fraunces', serif; font-size: 42px; line-height: 1.05;
-
-  color: #fff; margin-bottom: 16px;
-
-}
-
-.sp-h em { font-style: italic; color: #F5A623; }
-
-.sp-p { font-size: 15px; color: rgba(255,255,255,0.44); line-height: 1.72; max-width: 480px; margin-bottom: 20px; }
-
-.sp-pull {
-
-  font-family: 'Fraunces', serif; font-size: 17px; font-style: italic;
-
-  color: rgba(255,255,255,0.38); padding-left: 18px;
-
-  border-left: 3px solid #F5A623; line-height: 1.45;
-
-}
-
-.sp-pull strong { font-style: normal; color: #F5A623; }
-
-/* Sticky phone column */
-
-.sticky-col {
-
-  position: sticky; top: 56px; height: calc(100vh - 56px);
-
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-
-  background: rgba(5,18,24,0.7); border-left: 1px solid rgba(255,255,255,0.06);
-
-  gap: 10px; padding: 20px;
-
-}
-
-.sticky-label {
-
-  font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.25);
-
-  letter-spacing: .18em; text-transform: uppercase;
-
-}
-
-.sticky-phone {
-
-  position: relative; flex-shrink: 0;
-
-  width: clamp(186px, 14vw, 212px); aspect-ratio: 9 / 19.3;
-
-  background: linear-gradient(150deg, #24292f 0%, #0b0e12 62%);
-
-  border-radius: 34px; padding: 6px;
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  display: flex; flex-direction: column;
-
-  box-shadow: 0 30px 64px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.05);
-
-}
-
-.sticky-phone .phone-inner { border-radius: 28px; }
-
-.sticky-notch {
-
-  position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
-
-  width: 32%; height: 12px; background: #000; border-radius: 999px; z-index: 6;
-
-}
-
-/* ── BEFORE / AFTER (from A) ── */
-
-.compare-section {
-
-  background: #071E25; padding: 72px 64px;
-
-  max-width: 1240px; margin-inline: auto;
-
-  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
-
-}
-
-.cs-left .cs-h {
-
-  font-family: 'Fraunces', serif; font-size: 38px;
-
-  color: #fff; line-height: 1.1; margin-bottom: 14px;
-
-}
-
-.cs-left .cs-h em { font-style: italic; color: #F5A623; }
-
-.cs-left p { font-size: 14px; color: rgba(255,255,255,0.42); line-height: 1.75; margin-bottom: 20px; }
-
-.cs-pull {
-
-  font-family: 'Fraunces', serif; font-size: 17px; font-style: italic;
-
-  color: rgba(255,255,255,0.38); padding-left: 16px;
-
-  border-left: 3px solid #F5A623; line-height: 1.45;
-
-}
-
-.cs-pull strong { font-style: normal; color: #F5A623; }
-
-.cmp { border-radius: 12px; padding: 18px; margin-bottom: 12px; }
-
-.cmp:last-child { margin-bottom: 0; }
-
-.cmp.bad { background: rgba(160,32,32,0.1); border-left: 3px solid rgba(200,80,80,0.4); }
-
-.cmp.good { background: rgba(26,104,96,0.12); border-left: 3px solid #1A9E80; }
-
-.cmp-l {
-
-  font-size: 9px; font-weight: 700; text-transform: uppercase;
-
-  letter-spacing: .1em; margin-bottom: 7px;
-
-}
-
-.cmp.bad .cmp-l { color: rgba(200,80,80,0.8); }
-
-.cmp.good .cmp-l { color: #1A9E80; }
-
-.cmp-t { font-size: 14px; line-height: 1.6; }
-
-.cmp.bad .cmp-t { color: rgba(220,160,160,0.75); }
-
-.cmp.good .cmp-t { color: rgba(160,220,200,0.8); }
-
-.cmp-stat { font-size: 22px; font-weight: 900; margin-top: 8px; }
-
-.cmp.bad .cmp-stat { color: rgba(200,100,100,0.6); }
-
-.cmp.good .cmp-stat { color: #1A9E80; }
-
-/* ── HOW CO-PILOT WORKS (new trust section) ── */
-
-.how { background: #0A1820; padding: 72px 64px; }
-
-.how-inner { max-width: 1000px; margin: 0 auto; }
-
-.how-eye {
-
-  font-size: 9px; font-weight: 700; color: rgba(245,166,35,0.5);
-
-  text-transform: uppercase; letter-spacing: .2em; margin-bottom: 10px;
-
-}
-
-.how-h {
-
-  font-family: 'Fraunces', serif; font-size: 34px; color: #fff;
-
-  margin-bottom: 10px; line-height: 1.1;
-
-}
-
-.how-sub { font-size: 14px; color: rgba(255,255,255,0.4); max-width: 640px; margin-bottom: 40px; line-height: 1.7; }
-
-.how-grid {
-
-  display: grid; grid-template-columns: repeat(3,1fr);
-
-  gap: 2px; background: rgba(255,255,255,0.05); border-radius: 14px; overflow: hidden;
-
-}
-
-.how-step {
-
-  background: #0A1820; padding: 28px 24px;
-
-  border-right: 1px solid rgba(255,255,255,0.04);
-
-}
-
-.how-step:last-child { border-right: none; }
-
-.how-num {
-
-  font-family: 'Fraunces', serif; font-size: 44px;
-
-  color: rgba(245,166,35,0.1); line-height: .85; margin-bottom: 10px;
-
-}
-
-.how-ttl { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-
-.how-desc { font-size: 12px; color: rgba(255,255,255,0.36); line-height: 1.6; }
-
-/* ── SUPPORTED PARKS (new) ── */
-
-.parks { background: #071E25; padding: 56px 64px; border-top: 1px solid rgba(255,255,255,0.05); }
-
-.parks-inner { max-width: 900px; margin: 0 auto; text-align: center; }
-
-.parks-eye {
-
-  font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.28);
-
-  text-transform: uppercase; letter-spacing: .2em; margin-bottom: 16px;
-
-}
-
-.parks-h { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
-
-.parks-grid { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-
-.park-pill {
-
-  display: flex; align-items: center; gap: 8px;
-
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-
-  border-radius: 22px; padding: 8px 16px;
-
-  font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.65);
-
-}
-
-.park-pill.live { border-color: rgba(26,104,96,0.5); color: #8AACAE; }
-
-.park-pill.live .dot { width: 6px; height: 6px; border-radius: 50%; background: #1A9E80; }
-
-.park-pill.coming .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(245,166,35,0.4); }
-
-.park-pill.coming { opacity: .45; cursor: default; }
-
-.soon-tag { font-size: 10px; font-weight: 600; opacity: .7; margin-left: 6px; font-style: italic; }
-
-.parks-note { font-size: 11px; color: rgba(255,255,255,0.22); margin-top: 16px; }
-
-/* ── TESTIMONIALS ── */
-
-.proof { background: #EEF5F4; padding: 72px 64px; }
-
-.proof-inner { max-width: 1100px; margin: 0 auto; }
-
-.proof-eye {
-
-  font-size: 9px; font-weight: 700; color: #4A7A7C;
-
-  text-transform: uppercase; letter-spacing: .18em;
-
-  text-align: center; margin-bottom: 28px;
-
-}
-
-.proof-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 680px; margin: 0 auto; }
-
-.tq {
-
-  background: #fff; border-radius: 14px; padding: 24px;
-
-  border: 1px solid rgba(7,30,37,0.07);
-
-}
-
-.tq.feat { border: 2px solid #1A6860; }
-
-.tq-stars { color: #ECA050; font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
-
-.tq-text {
-
-  font-family: 'Fraunces', serif; font-size: 16px; color: #071E25;
-
-  line-height: 1.45; font-style: italic; margin-bottom: 10px;
-
-}
-
-.tq.feat .tq-text { font-size: 19px; }
-
-.tq-by { font-size: 11px; font-weight: 700; color: #4A7A7C; }
-
-/* ── FINAL CTA ── */
-
-.bottom-cta { background: #071E25; padding: 80px 48px; text-align: center; }
-
-.cta-inner { max-width: 500px; margin: 0 auto; }
-
-.cta-logo { width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 18px; display: block; }
-
-.cta-h {
-
-  font-family: 'Fraunces', serif; font-size: 38px; color: #fff;
-
-  line-height: 1.1; margin-bottom: 8px;
-
-}
-
-.cta-h em { font-style: italic; color: #F5A623; }
-
-.cta-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
-
-.cta-form {
-
-  display: flex; flex-direction: column; gap: 10px;
-
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(245,166,35,0.15);
-
-  border-radius: 18px; padding: 30px;
-
-}
-
-.cta-form input {
-
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-
-  border-radius: 10px; padding: 13px 15px; font-size: 14px; color: #fff; outline: none;
-
-}
-
-.cta-form input:focus { border-color: rgba(245,166,35,0.5); }
-
-.park-tog { display: flex; gap: 8px; }
-
-.park-tog button {
-
-  flex: 1; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1);
-
-  border-radius: 10px; padding: 11px; font-size: 12px; font-weight: 600;
-
-  color: rgba(255,255,255,0.35); cursor: pointer;
-
-}
-
-.park-tog button.on { background: rgba(245,166,35,0.12); border-color: #F5A623; color: #F5A623; }
-
-.cta-btn {
-
-  background: #C86030; color: #fff; border: none; border-radius: 10px;
-
-  padding: 15px; font-size: 14px; font-weight: 800; cursor: pointer;
-
-}
-
-.cta-fine { font-size: 10px; color: rgba(255,255,255,0.22); margin-top: 4px; }
-
-/* ── FOOTER ── */
-
-.phone-inner{transition:opacity 0.2s}
-
-.pm-header{background:#071E25;padding:9cqw 5cqw 0;flex-shrink:0}
-
-.pm-eye{font-size:3.3cqw;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.12em}
-
-.pm-ttl{font-size:6cqw;font-weight:800;color:#fff;margin:1cqw 0;letter-spacing:-.2px}
-
-.pm-sub{font-size:3.4cqw;color:rgba(255,255,255,0.35);margin-bottom:3cqw}
-
-.pm-tabs{display:flex;gap:1.4cqw}
-
-.pm-tabs .t{flex:1;text-align:center;font-size:3.4cqw;font-weight:700;padding:2cqw 0;border-radius:2cqw 2cqw 0 0;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.35)}
-
-.pm-tabs .t.active{background:#EEF5F4;color:#071E25}
-
-.pm-body{background:#EEF5F4;flex:1;padding:3.5cqw 4cqw;overflow:hidden;display:flex;flex-direction:column;gap:2cqw}
-
-.pm-body.chat{background:#fff;gap:2.6cqw}
-
-.pm-cta{background:#C86030;color:#fff;border-radius:3cqw;padding:3cqw 3.5cqw;font-size:3.4cqw;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-
-.pm-savebar{background:#C86030;color:#fff;border-radius:3cqw;padding:3cqw 3.5cqw;font-size:3.2cqw;display:flex;justify-content:space-between;align-items:center}
-
-.pm-savebar strong{font-size:3.6cqw}
-
-.pm-card{background:#fff;border-radius:3cqw;padding:2.4cqw 3cqw;display:flex;align-items:center;gap:2cqw;border:0.5px solid rgba(7,30,37,0.06)}
-
-.pm-card.accent{border-left:1.4cqw solid #7040D0;border-radius:0 3cqw 3cqw 0}
-
-.pm-card.snack{border-left:1.4cqw solid #C86030;border-radius:0 3cqw 3cqw 0}
-
-.pm-card.changed{background:#fff;border:1px solid #1A6860}
-
-.pm-card.muted{background:#F5F8F8}
-
-.tm{font-size:4.4cqw;font-weight:800;color:#1A6860;width:11cqw;flex-shrink:0;line-height:1.1}
-
-.tm small{display:block;font-size:2.7cqw;color:#8AACAE;font-weight:600}
-
-.cn{flex:1;font-size:4cqw;font-weight:700;color:#071E25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-.badge{font-size:2.7cqw;font-weight:700;padding:.7cqw 2cqw;border-radius:20px;white-space:nowrap}
-
-.badge.ride{background:#E0F0EE;color:#0A4840}
-
-.badge.photo{background:#EDE6FF;color:#3A1A90}
-
-.badge.snk{background:#FFF0E8;color:#903820}
-
-.pill{font-size:3cqw;font-weight:800;padding:.7cqw 2.4cqw;border-radius:20px;white-space:nowrap}
-
-.pill.lo{background:#E0F5E8;color:#0F6830}
-
-.pill.mid{background:#FFF4E0;color:#9A5800}
-
-.pill.hi{background:#FCEAEA;color:#A02020}
-
-.chip{font-size:2.7cqw;font-weight:700;padding:.7cqw 2cqw;border-radius:20px;white-space:nowrap}
-
-.chip.up{background:#FFF4E0;color:#8A5800}
-
-.chip.late{background:#E0F0EE;color:#0A4840}
-
-.pm-actions{display:flex;gap:2cqw;margin-top:1.4cqw}
-
-.pm-actions .acc{flex:2;background:#1A6860;color:#fff;border:none;border-radius:2.6cqw;font-size:3.2cqw;font-weight:700;padding:2.6cqw;cursor:pointer}
-
-.pm-actions .kp{flex:1;background:transparent;border:1px solid rgba(7,30,37,0.15);border-radius:2.6cqw;font-size:3cqw;color:#4A7A7C;padding:2.6cqw;cursor:pointer}
-
-.wt-row{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:2.6cqw;padding:2.6cqw 3cqw;border:0.5px solid rgba(7,30,37,0.06)}
-
-.wt-row.alert{border-color:rgba(160,32,32,0.2)}
-
-.wn{font-size:3.7cqw;font-weight:600;color:#071E25}
-
-.wt-ai{font-size:3cqw;color:#1A6860;font-style:italic;padding:2.6cqw 3cqw;background:#E8F5F4;border-radius:2.6cqw;margin-top:1.4cqw;line-height:1.4}
-
-.bubble{border-radius:3.5cqw;padding:2.6cqw 3.4cqw;font-size:3.4cqw;line-height:1.45;max-width:88%}
-
-.bubble.user{background:#1A6860;color:#fff;align-self:flex-end;margin-left:auto}
-
-.bubble.ai{background:#F0F4F4;color:#071E25}
-
-.chat-input{display:flex;gap:1.5cqw;align-items:center;background:#fff;border:1px solid rgba(7,30,37,0.1);border-radius:3cqw;padding:1.8cqw 3cqw;margin-top:auto}
-
-.chat-input span{flex:1;font-size:3cqw;color:rgba(7,30,37,0.3)}
-
-.chat-input button{background:#1A6860;color:#fff;border:none;border-radius:2cqw;font-size:3.4cqw;padding:1.6cqw 3cqw;cursor:pointer}
-
-.pm-nav{background:#fff;border-top:0.5px solid rgba(7,30,37,0.07);padding:2.4cqw 0 1.8cqw;display:flex;flex-shrink:0}
-
-.ni{flex:1;text-align:center;font-size:2.8cqw;font-weight:600;color:#8AACAE}
-
-.ni.active{color:#071E25;font-weight:700}
-
-.slide-dots{display:flex;gap:5px}
-
-.slide-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.2);transition:background .3s}
-
-.slide-dot.active{background:#F5A623}
-
-/* ── MOBILE ── */
-
-/* Large desktop: relax hero columns before stacking */
-
-@media (max-width: 1180px) {
-
-  .nav { padding: 0 28px; }
-
-  .hero { grid-template-columns: minmax(240px, 320px) minmax(0, 1fr) 264px; }
-
-  .hero-copy { padding: 44px 36px; }
-
-}
-
-/* Tablet: stack hero, single-column narrative + compare + how */
-
-@media (max-width: 1024px) {
-
-  .nav { padding: 0 20px; }
-
-  .nav-links { display: none; }
-
-  .hero { grid-template-columns: 1fr; }
-
-  .hero-photo { min-height: 280px; max-height: 360px; }
-
-  .hero-photo::after { top: auto; left: 0; right: 0; width: auto; height: 110px; background: linear-gradient(to bottom, transparent, #071E25); }
-
-  .hero-copy { padding: 44px 28px; border-right: none; }
-
-  .phone-col { border-left: none; border-top: 1px solid rgba(255,255,255,0.06); padding: 36px 24px; }
-
-  .stats { padding: 14px 20px; flex-wrap: wrap; }
-
-  .st { flex: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); padding: 12px 10px; }
-
-  .st:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.12); }
-
-  .st:nth-child(3), .st:nth-child(4) { border-bottom: none; }
-
-  .problems { padding: 52px 24px; }
-
-  .features { padding: 56px 24px; }
-
-  .narrative { grid-template-columns: 1fr; }
-
-  .sticky-col {
-
-    position: relative; top: auto; height: auto;
-
-    flex-direction: row; padding: 28px 24px; gap: 22px;
-
-    border-left: none; border-top: 1px solid rgba(255,255,255,0.07);
-
-  }
-
-  .sp { padding: 52px 28px; min-height: auto; }
-
-  .compare-section { grid-template-columns: 1fr; padding: 56px 28px; gap: 36px; }
-
-  .how { padding: 56px 24px; }
-
-  .how-grid { grid-template-columns: 1fr; gap: 0; }
-
-  .how-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.04); }
-
-  .how-step:last-child { border-bottom: none; }
-
-  .parks { padding: 52px 24px; }
-
-  .proof { padding: 56px 24px; }
-
-  .bottom-cta { padding: 56px 24px; }
-
-}
-
-/* Large phone */
-
-@media (max-width: 700px) {
-
-  .hero-copy { padding: 36px 22px; }
-
-  .prob-grid { grid-template-columns: 1fr; }
-
-  .sticky-col { flex-direction: column; gap: 14px; }
-
-  .hero-trust { flex-direction: column; align-items: flex-start; gap: 10px; }
-
-  .hero-trust .ht-div { display: none; }
-
-  .ht-item { flex-direction: row; align-items: baseline; gap: 8px; }
-
-}
-
-/* Small phone */
-
-@media (max-width: 560px) {
-
-  .nav-cta { padding: 9px 16px; }
-
-  .parks-grid { gap: 8px; }
-
-  .park-pill { font-size: 11px; padding: 7px 13px; }
-
-  .cta-form { padding: 22px 18px; }
-
-  .park-tog { flex-direction: column; }
-
-}
-
-/* ── PRICING ── */
-
-.pricing-section { background: #071E25; padding: 72px 0 0; border-top: 1px solid rgba(255,255,255,0.06); }
-
-.pricing-inner { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
-
-.pricing-hero-inner { text-align: center; padding: 0 32px 36px; }
-
-.pricing-eyepill {
-
-  display: inline-flex; align-items: center; gap: 5px;
-
-  font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
-
-  color: #ECA050; background: rgba(236,160,80,0.10); border: 1px solid rgba(236,160,80,0.20);
-
-  border-radius: 20px; padding: 4px 12px; margin-bottom: 14px;
-
-}
-
-.pricing-hero-inner h2 {
-
-  font-family: 'Fraunces', serif;
-
-  font-size: clamp(26px, 3.4vw, 36px); font-weight: 900;
-
-  letter-spacing: -.6px; color: #fff; margin-bottom: 10px; line-height: 1.1;
-
-}
-
-.pricing-hero-inner h2 em { color: #ECA050; font-style: italic; }
-
-.pricing-hero-inner p { font-size: 14px; color: rgba(255,255,255,0.40); line-height: 1.6; max-width: 380px; margin: 0 auto 20px; }
-
-.trialbanner {
-
-  display: inline-flex; align-items: center; gap: 8px;
-
-  background: rgba(26,104,96,0.15); border: 1px solid rgba(26,104,96,0.35);
-
-  border-radius: 10px; padding: 9px 16px;
-
-  font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.68);
-
-}
-
-.greendot { width: 7px; height: 7px; border-radius: 50%; background: #4AE080; flex-shrink: 0; }
-
-/* Section labels */
-
-.slbl {
-
-  text-align: center; font-size: 8px; font-weight: 700;
-
-  letter-spacing: .14em; text-transform: uppercase;
-
-  color: #4A7A7C; padding: 26px 24px 10px;
-
-}
-
-/* Single trip card */
-
-.stwrap { padding: 0 32px; max-width: 1000px; margin: 0 auto; }
-
-.stcard {
-
-  background: rgba(200,96,48,0.08); border: 1px solid rgba(200,96,48,0.26);
-
-  border-radius: 14px; padding: 20px 22px;
-
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-
-}
-
-.sticon {
-
-  width: 40px; height: 40px; border-radius: 10px;
-
-  background: rgba(200,96,48,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-
-}
-
-.stinfo { flex-shrink: 0; min-width: 110px; }
-
-.stname { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 2px; }
-
-.sttag { font-size: 10px; color: rgba(255,255,255,0.38); }
-
-.stpills { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; min-width: 200px; }
-
-.stpill {
-
-  font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.50);
-
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-
-  border-radius: 20px; padding: 3px 9px;
-
-}
-
-.stright { display: flex; align-items: center; gap: 14px; flex-shrink: 0; margin-left: auto; }
-
-.stpricebox { text-align: right; }
-
-.stamount { font-size: 32px; font-weight: 900; letter-spacing: -1.2px; color: #fff; line-height: 1; }
-
-.stper { font-size: 10px; color: rgba(255,255,255,0.30); margin-top: 2px; }
-
-.stbtn {
-
-  padding: 12px 20px; background: #C86030; color: #fff; border: none;
-
-  border-radius: 9px; font-family: inherit; font-size: 12px; font-weight: 700;
-
-  cursor: pointer; white-space: nowrap; transition: background .15s;
-
-}
-
-.stbtn:hover { background: #d4683a; }
-
-/* Plan cards grid */
-
-.plans {
-
-  display: grid; grid-template-columns: 1fr 1fr;
-
-  gap: 10px; padding: 0 32px; max-width: 1000px; margin: 0 auto; align-items: stretch;
-
-}
-
-.pc {
-
-  background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08);
-
-  border-radius: 14px; padding: 22px 20px 18px;
-
-  position: relative; display: flex; flex-direction: column;
-
-}
-
-.pc.feat {
-
-  background: rgba(26,104,96,0.12); border: 1.5px solid rgba(26,104,96,0.50);
-
-}
-
-.popbadge {
-
-  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-
-  background: #1A6860; color: #fff; font-size: 8px; font-weight: 800;
-
-  letter-spacing: .09em; text-transform: uppercase;
-
-  padding: 3px 10px; border-radius: 20px; white-space: nowrap;
-
-}
-
-.picon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
-
-.picon.teal { background: rgba(26,104,96,0.22); }
-
-.picon.amb { background: rgba(236,160,80,0.16); }
-
-.pname { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; }
-
-.ptag { font-size: 10px; color: rgba(255,255,255,0.34); margin-bottom: 18px; line-height: 1.4; }
-
-/* Price blocks */
-
-.price-block {
-
-  background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.08);
-
-  border-radius: 10px; padding: 14px 16px; margin-bottom: 16px;
-
-}
-
-.price-single { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-
-.ps-label { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 2px; }
-
-.ps-note { font-size: 9px; color: rgba(255,255,255,0.24); }
-
-.ps-right { display: flex; align-items: center; gap: 6px; }
-
-.ps-amount-wrap { display: flex; align-items: baseline; gap: 2px; }
-
-.ps-dollar { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.45); margin-top: 3px; }
-
-.ps-amount { font-size: 32px; font-weight: 900; letter-spacing: -1.2px; color: #fff; line-height: 1; }
-
-.ps-per { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.30); }
-
-.price-dual { display: flex; flex-direction: column; gap: 0; }
-
-.price-row-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 0; }
-
-.price-row-item:first-child { border-bottom: 0.5px solid rgba(255,255,255,0.07); }
-
-.pri-label { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 1px; }
-
-.pri-note { font-size: 9px; color: rgba(255,255,255,0.22); }
-
-.pri-right { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
-
-.pri-amount-wrap { display: flex; align-items: baseline; gap: 2px; }
-
-.pri-dollar { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.40); margin-top: 2px; }
-
-.pri-amount { font-size: 26px; font-weight: 900; letter-spacing: -1px; color: #fff; line-height: 1; }
-
-.pri-amount.dim { font-size: 20px; color: rgba(255,255,255,0.50); }
-
-.pri-per { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.30); }
-
-.save-pill {
-
-  font-size: 9px; font-weight: 800; color: #ECA050;
-
-  background: rgba(236,160,80,0.12); border-radius: 20px; padding: 2px 7px; white-space: nowrap;
-
-}
-
-.feats { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; flex: 1; }
-
-.feats li { display: flex; align-items: flex-start; gap: 7px; font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.58); line-height: 1.3; }
-
-.fck { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: .5px; }
-
-.fck.t { background: rgba(26,104,96,0.28); }
-
-.fck.a { background: rgba(236,160,80,0.17); }
-
-.pdiv { height: .5px; background: rgba(255,255,255,0.07); margin-bottom: 13px; }
-
-.pcta { width: 100%; padding: 11px; border-radius: 9px; font-family: inherit; font-size: 11px; font-weight: 700; border: none; cursor: pointer; transition: background .15s; }
-
-.pcta.green { background: #1A6860; color: #fff; }
-
-.pcta.green:hover { background: #1e7870; }
-
-.pcta.ghost { background: transparent; color: rgba(255,255,255,0.48); border: 1px solid rgba(255,255,255,0.13); }
-
-.pcta.ghost:hover { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.75); }
-
-.ctasub { text-align: center; font-size: 9px; color: rgba(255,255,255,0.20); margin-top: 6px; }
-
-.ck-t { fill: none; stroke: #1A6860; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-
-.ck-a { fill: none; stroke: #ECA050; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-
-/* Trial capture */
-
-.trwrap { padding: 0 32px; max-width: 1000px; margin: 0 auto; }
-
-.trcard {
-
-  background: rgba(26,104,96,0.11); border: 1px solid rgba(26,104,96,0.28);
-
-  border-radius: 15px; padding: 26px 26px 20px; text-align: center;
-
-}
-
-.teyebrow { font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #ECA050; margin-bottom: 8px; }
-
-.trcard h2 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 800; letter-spacing: -.4px; color: #fff; margin-bottom: 8px; }
-
-.trcard p { font-size: 11px; color: rgba(255,255,255,0.38); line-height: 1.55; max-width: 340px; margin: 0 auto 18px; }
-
-.tform { display: flex; gap: 7px; max-width: 380px; margin: 0 auto 10px; flex-wrap: wrap; justify-content: center; }
-
-.tinput {
-
-  flex: 1; min-width: 180px; padding: 11px 14px;
-
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
-
-  border-radius: 9px; font-family: inherit; font-size: 12px; color: #fff; outline: none;
-
-  transition: border-color .2s;
-
-}
-
-.tinput::placeholder { color: rgba(255,255,255,0.30); }
-
-.tinput:focus { border-color: rgba(26,104,96,0.65); }
-
-.tbtn {
-
-  padding: 11px 20px; background: #C86030; color: #fff; border: none;
-
-  border-radius: 9px; font-family: inherit; font-size: 12px; font-weight: 700;
-
-  cursor: pointer; white-space: nowrap; transition: background .15s;
-
-}
-
-.tbtn:hover { background: #d4683a; }
-
-.promotoggle {
-
-  display: flex; align-items: center; justify-content: center; gap: 5px;
-
-  font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.28);
-
-  margin: 0 auto 12px; cursor: pointer; transition: color .2s; background: none; border: none;
-
-}
-
-.promotoggle:hover { color: rgba(255,255,255,0.55); }
-
-.promorow {
-
-  display: flex; gap: 7px; max-width: 380px; margin: 0 auto 16px;
-
-  overflow: hidden; max-height: 0; transition: max-height .3s ease;
-
-}
-
-.promorow.open { max-height: 60px; }
-
-.promoinput {
-
-  flex: 1; padding: 10px 13px; background: rgba(255,255,255,0.04);
-
-  border: 1px dashed rgba(255,255,255,0.16); border-radius: 9px;
-
-  font-family: inherit; font-size: 11px; font-weight: 700;
-
-  letter-spacing: .07em; text-transform: uppercase; color: #fff; outline: none;
-
-  transition: border-color .2s;
-
-}
-
-.promoinput::placeholder { text-transform: none; font-weight: 400; letter-spacing: 0; color: rgba(255,255,255,0.25); }
-
-.promoinput:focus { border-color: rgba(26,104,96,0.65); }
-
-.promoapply {
-
-  padding: 10px 16px; background: rgba(255,255,255,0.06);
-
-  border: 1px solid rgba(255,255,255,0.12); border-radius: 9px;
-
-  font-family: inherit; font-size: 11px; font-weight: 700;
-
-  color: rgba(255,255,255,0.45); cursor: pointer; transition: background .15s, color .15s;
-
-}
-
-.promoapply:hover { background: rgba(255,255,255,0.12); color: #fff; }
-
-.promo-feedback { max-width: 380px; margin: 0 auto; font-size: 10px; font-weight: 600; text-align: center; background: transparent; border: none; height: 0; overflow: hidden; }
-
-.promo-feedback.success { height: auto; padding: 4px 0 12px; color: #4AE080; }
-
-.promo-feedback.error { height: auto; padding: 4px 0 12px; color: #E07070; }
-
-.ttrust { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-
-.titem { display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.26); }
-
-.tdot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.16); }
-
-/* Trust cards */
-
-.trustgrid {
-
-  display: grid; grid-template-columns: repeat(3,1fr);
-
-  gap: 8px; padding: 0 32px; max-width: 1000px; margin: 0 auto;
-
-}
-
-.tcard {
-
-  background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.065);
-
-  border-radius: 11px; padding: 13px 14px; display: flex; gap: 10px;
-
-}
-
-.ticon {
-
-  width: 28px; height: 28px; border-radius: 7px;
-
-  background: rgba(26,104,96,0.17); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-
-}
-
-.th4 { font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-
-.tp { font-size: 10px; color: rgba(255,255,255,0.33); line-height: 1.4; }
-
-/* FAQ */
-
-.faqwrap { max-width: 680px; margin: 0 auto; padding: 4px 32px 56px; }
-
-.faqhdr { text-align: center; font-size: 8px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #4A7A7C; margin-bottom: 14px; }
-
-.faqitem { border-bottom: .5px solid rgba(255,255,255,0.065); padding: 12px 0; cursor: pointer; }
-
-.faqitem:last-child { border-bottom: none; }
-
-.faqq { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.68); }
-
-.faqq svg { flex-shrink: 0; transition: transform .25s; }
-
-.faqitem.open .faqq svg { transform: rotate(180deg); }
-
-.faqa { font-size: 10px; color: rgba(255,255,255,0.34); line-height: 1.55; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; }
-
-.faqitem.open .faqa { max-height: 200px; padding-top: 8px; }
-
-.pricing-spacer { height: 24px; }
-
-/* Pricing responsive */
-
-@media (max-width: 1024px) {
-
-  .pricing-section { padding: 56px 0 0; }
-
-  .stwrap, .trwrap { padding: 0 20px; }
-
-  .plans { padding: 0 20px; }
-
-  .trustgrid { padding: 0 20px; }
-
-  .faqwrap { padding: 4px 20px 48px; }
-
-}
-
-@media (max-width: 700px) {
-
-  .plans { grid-template-columns: 1fr; }
-
-  .trustgrid { grid-template-columns: 1fr; }
-
-  .stcard { flex-direction: column; align-items: flex-start; }
-
-  .stright { margin-left: 0; }
-
-}
-
-@media (max-width: 560px) {
-
-  .tform { flex-direction: column; }
-
-  .tinput, .tbtn { width: 100%; }
-
-  .stpills { display: none; }
-
-}
-
-/* ── MID-PAGE CTA ── */
-
-.mid-cta {
-
-  background: #1A6860;
-
-  padding: 22px max(64px, calc((100% - 1160px) / 2));
-
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-
-}
-
-.mid-cta-text {
-
-  font-family: 'Fraunces', serif; font-size: 17px;
-
-  font-style: italic; font-weight: 700; color: rgba(255,255,255,0.9);
-
-}
-
-.mid-cta-btn {
-
-  background: #fff; color: #1A6860; border: none; border-radius: 22px;
-
-  padding: 11px 24px; font-size: 13px; font-weight: 800; cursor: pointer;
-
-  font-family: inherit; white-space: nowrap; transition: opacity .15s; flex-shrink: 0;
-
-}
-
-.mid-cta-btn:hover { opacity: .88; }
-
-@media (max-width: 640px) {
-
-  .mid-cta { flex-direction: column; padding: 24px 20px; text-align: center; }
-
-  .mid-cta-btn { width: 100%; }
-
-}
-
-/* ── FOOTER ── */
-
-footer {
-
-  background: #030C10; padding: 24px 48px;
-
-  border-top: 1px solid rgba(255,255,255,0.06);
-
-  display: flex; flex-direction: column; gap: 12px;
-
-}
-
-.footer-left { display: flex; align-items: center; gap: 12px; }
-
-.footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 500; }
-
-.footer-legal {
-
-  font-size: 10px; color: rgba(255,255,255,0.18); line-height: 1.6; max-width: 800px;
-
-}
-
-@media (max-width: 640px) {
-
-  footer { padding: 20px; }
-
-  .footer-left { flex-direction: column; align-items: flex-start; gap: 6px; }
-
-}
-
-.promo-visible {
-
-  max-width: 380px; margin: 0 auto 16px;
-
-}
-
-.promo-label {
-
-  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.45);
-
-  margin-bottom: 8px; text-align: center;
-
-}
-
-.promo-visible-row { display: flex; gap: 8px; }
-
-.promoinput-visible {
-
-  flex: 1; padding: 12px 14px;
-
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
-
-  border-radius: 9px; font-family: inherit; font-size: 13px;
-
-  font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
-
-  color: #fff; outline: none; transition: border-color .2s;
-
-}
-
-.promoinput-visible::placeholder {
-
-  text-transform: none; font-weight: 400; letter-spacing: 0;
-
-  color: rgba(255,255,255,0.28);
-
-}
-
-.promoinput-visible:focus { border-color: rgba(26,104,96,0.65); }
-
-.promoapply-visible {
-
-  padding: 12px 20px; background: rgba(255,255,255,0.08);
-
-  border: 1px solid rgba(255,255,255,0.18); border-radius: 9px;
-
-  font-family: inherit; font-size: 13px; font-weight: 700;
-
-  color: rgba(255,255,255,0.6); cursor: pointer;
-
-  transition: background .15s, color .15s; white-space: nowrap;
-
-}
-
-.promoapply-visible:hover { background: rgba(255,255,255,0.15); color: #fff; }
-
-@media (max-width: 560px) {
-
-  .promo-visible-row { flex-direction: column; }
-
-  .promoapply-visible { width: 100%; }
-
-}
-
-/* ── MORE FEATURES BOX ── */
-
-.more-features {
-
-  margin-top: 20px;
-
-  background: rgba(7,30,37,0.04);
-
-  border: 1px solid rgba(7,30,37,0.08);
-
-  border-radius: 14px;
-
-  padding: 22px 24px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
-
-}
-
-.mf-label {
-
-  font-size: 11px; font-weight: 800; color: #4A7A7C;
-
-  letter-spacing: .08em; text-transform: uppercase;
-
-}
-
-.mf-buckets {
-
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-
-}
-
-.mf-bucket-label {
-
-  font-size: 10px; font-weight: 800; color: #1A6860;
-
-  text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px;
-
-}
-
-.mf-bucket-items { display: flex; flex-direction: column; gap: 6px; }
-
-.mf-item {
-
-  font-size: 12px; font-weight: 600; color: #4A7A7C;
-
-  background: #FDFAF5; border: 1px solid rgba(7,30,37,0.08);
-
-  border-radius: 20px; padding: 7px 14px; text-align: center;
-
-}
-
-@media (max-width: 900px) {
-
-  .mf-buckets { grid-template-columns: 1fr 1fr; }
-
-}
-
-@media (max-width: 640px) {
-
-  .mf-buckets { grid-template-columns: 1fr; }
-
-}
-
-.faq-support {
-
-  text-align: center; font-size: 12px; color: rgba(255,255,255,0.28);
-
-  padding: 0 32px 48px; margin-top: 8px;
-
-}
-
-.faq-support-link {
-
-  color: #4A7A7C; text-decoration: none; font-weight: 600;
-
-  transition: color .15s;
-
-}
-
-.faq-support-link:hover { color: #8AACAE; }
-
-.footer-support {
-
-  font-size: 12px; color: rgba(255,255,255,0.28); text-decoration: none;
-
-  font-weight: 500; transition: color .15s;
-
-}
-
-.footer-support:hover { color: rgba(255,255,255,0.55); }
-
-/* Hero trust metrics */
-
-.hero-trust {
-
-  display: flex; align-items: center; gap: 0;
-
-  margin: 14px 0 10px; max-width: 420px;
-
-}
-
-.ht-item { display: flex; flex-direction: column; flex: 1; }
-
-.ht-n { font-size: 15px; font-weight: 900; color: #fff; line-height: 1; }
-
-.ht-l { font-size: 10px; color: rgba(255,255,255,0.38); margin-top: 2px; }
-
-.ht-div { width: 1px; background: rgba(255,255,255,0.12); height: 28px; margin: 0 14px; flex-shrink: 0; }
-
-/* Testimonial with photo */
-
-.proof-with-photo {
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 48px;
-
-  align-items: center;
-
-  max-width: 780px;
-
-  margin: 0 auto;
-
-}
-
-.proof-photo img {
-
-  width: 100%;
-
-  border-radius: 14px;
-
-  object-fit: cover;
-
-  max-height: 460px;
-
-  display: block;
-
-}
-
-@media (max-width: 700px) {
-
-  .proof-with-photo { grid-template-columns: 1fr; gap: 24px; }
-
-  .proof-photo img { max-height: 300px; }
-
-}
-
-/* Compare section with photo */
-
-.compare-with-photo {
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 32px;
-
-  align-items: start;
-
-}
-
-.compare-photo {
-
-  border-radius: 12px;
-
-  overflow: hidden;
-
-  margin-top: 16px;
-
-}
-
-.compare-photo img {
-
-  width: 100%;
-
-  border-radius: 12px;
-
-  object-fit: cover;
-
-  max-height: 280px;
-
-  display: block;
-
-}
-
-@media (max-width: 1024px) {
-
-  .compare-with-photo { grid-template-columns: 1fr; }
-
-  .compare-photo img { max-height: 240px; }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- ── NAV ── -->
-
-<nav class="nav">
-
-  <a class="nav-logo" href="#">
-
-    <img src="https://app.themeparkcopilot.com/assets/brand/logo-primary.svg" alt="Theme Park Co-Pilot">
-
-    <span class="nav-wm">Theme Park Co<span>&#10022;</span>Pilot</span>
-
-  </a>
-
-  <div class="nav-links">
-
-    <a href="#disneyland" onclick="event.preventDefault();document.getElementById('disneyland').scrollIntoView({behavior:'smooth'})">Why families need it</a>
-
-    <a href="#how-it-works" onclick="event.preventDefault();document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">How it works</a>
-
-    <a href="#supported-parks" onclick="event.preventDefault();document.getElementById('supported-parks').scrollIntoView({behavior:'smooth'})">Supported parks</a>
-
-    <a href="#pricing" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
-
-  </div>
-
-  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Start free trial</button>
-
-</nav>
-
-<!-- ── HERO ── -->
-
-<section class="hero">
-
-  <div class="hero-photo">
-
-    <img src="https://app.themeparkcopilot.com/assets/brand/landing-photo-hero.svg" alt="Family enjoying a magical theme park day">
-
-  </div>
-
-  <div class="hero-copy">
-
-    <div class="hero-lockup">
-
-      <img src="https://app.themeparkcopilot.com/assets/brand/logo-primary.svg" class="hero-lockup-img" alt="Theme Park Co-Pilot">
-
-      <div class="hero-lockup-text">
-
-        <div class="hero-lockup-name">Theme Park Co<span>&#10022;</span>Pilot</div>
-
-        <div class="hero-lockup-tag">AI-Powered Theme Park Guide</div>
-
-      </div>
-
-    </div>
-
-    <div class="hero-h">Smarter days.<br><em>More magic.</em></div>
-
-    <p class="hero-tagline">Your AI theme park guide builds your plan, watches live wait times, and reroutes your family all day&nbsp;&mdash; so you ride more, wait less, and enjoy the moments you came for.</p>
-
-    <div class="hero-launch-badge">
-
-      <div class="hlb-dot"></div>
-
-      <span>Now live for <strong>Disneyland Resort</strong> &mdash; Walt Disney World coming soon</span>
-
-    </div>
-
-    <div class="hero-trust">
-
-      <div class="ht-item"><span class="ht-n">Up to 47 min saved</span><span class="ht-l">per park day</span></div>
-
-      <div class="ht-div"></div>
-
-      <div class="ht-item"><span class="ht-n">More rides</span><span class="ht-l">fewer wasted waits</span></div>
-
-      <div class="ht-div"></div>
-
-      <div class="ht-item"><span class="ht-n">7-day</span><span class="ht-l">free trial</span></div>
-
-    </div>
-
-    <p class="hero-fine">No credit card required &nbsp;&middot;&nbsp; Works on any phone</p>
-
-  </div>
-
-  <div class="phone-col">
-
-    <div class="phone-label">Live in the app</div>
-
-    <div class="phone-shell">
-
-      <div class="phone-notch"></div>
-
-      <div class="phone-inner" id="ph-hero"></div>
-
-    </div>
-
-    <div class="slide-dots" id="dots-hero">
-
-      <div class="slide-dot"></div><div class="slide-dot"></div>
-
-      <div class="slide-dot"></div><div class="slide-dot"></div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ── PROBLEM STRIP (new) ── -->
-
-<section class="problems" id="disneyland">
-
-  <div class="problems-inner">
-
-    <div class="prob-eye">Sound familiar?</div>
-
-    <div class="prob-h">Theme parks are amazing.<br>Planning them is exhausting.</div>
-
-    <p class="prob-sub">Every family asks the same questions the night before. Theme Park Co-Pilot answers all of them.</p>
-
-    <div class="prob-grid">
-
-      <div class="prob-item">
-
-        <div class="prob-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C86030" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-
-        <div class="prob-text"><strong>Which rides first?</strong>Crowds shift hourly. You won&rsquo;t know until you&rsquo;re there.</div>
-
-      </div>
-
-      <div class="prob-item">
-
-        <div class="prob-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C86030" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
-
-        <div class="prob-text"><strong>Will they miss their must-dos?</strong>One bad call and the day spirals.</div>
-
-      </div>
-
-      <div class="prob-item">
-
-        <div class="prob-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C86030" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-
-        <div class="prob-text"><strong>When do we eat?</strong>Dining at noon means 45-min waits or a hungry meltdown.</div>
-
-      </div>
-
-      <div class="prob-item">
-
-        <div class="prob-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C86030" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-
-        <div class="prob-text"><strong>Will I stare at my phone all day?</strong>You came for the magic, not the app.</div>
-
-      </div>
-
-      <div class="prob-item">
-
-        <div class="prob-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C86030" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-
-        <div class="prob-text"><strong>What does &ldquo;Lightning Lane&rdquo; even mean?</strong>The system changes constantly and fast.</div>
-
-      </div>
-
-      <div class="prob-item">
-
-        <div class="prob-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C86030" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-
-        <div class="prob-text"><strong>Every kid wants something different.</strong>Picky eaters, height limits, nap schedules.</div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ── FEATURE CARDS (from A) ── -->
-
-<section class="features" id="features">
-
-  <div class="features-inner">
-
-    <div class="feat-eye">What makes it different</div>
-
-    <div class="feat-h">Theme Park Co-Pilot <em>changes everything.</em></div>
-
-    <div class="feat-grid">
-
-      <div class="fc c1">
-
-        <div class="fc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6860" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-
-        <h3>AI Schedule Optimizer</h3>
-
-        <p>Builds your day-by-day plan before the trip, then reorders rides around live waits all day &mdash; explaining every change in plain English.</p>
-
-        <div class="fc-q">&ldquo;Moved Indiana Jones to 2 PM &mdash; waits drop after the lunch rush. Save ~40 min.&rdquo;</div>
-
-      </div>
-
-      <div class="fc c2">
-
-        <div class="fc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C86030" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-
-        <h3>Live Wait Routing</h3>
-
-        <p>Real wait times updated every few minutes. When a line spikes, one tap shows three better nearby options &mdash; ranked and explained.</p>
-
-        <div class="fc-q">&ldquo;Space Mountain 75 min. Star Tours next door: 15 min. Come back after 8 PM.&rdquo;</div>
-
-      </div>
-
-      <div class="fc c3">
-
-        <div class="fc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-
-        <h3>Ask AI &amp; Dining</h3>
-
-        <p>Instant answers to any mid-day question. Dining woven into your schedule &mdash; best windows, restaurant picks, and suggestions for picky eaters and young kids.</p>
-
-        <div class="fc-q">&ldquo;11:30 AM is your window for Blue Bayou &mdash; before the lunch rush hits.&rdquo;</div>
-
-      </div>
-
-      <div class="fc c4">
-
-        <div class="fc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A830" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><circle cx="12" cy="12" r="3" fill="#D4A830" stroke="none"/></svg></div>
-
-        <h3>Group Trip Intelligence</h3>
-
-        <p>Shared group notes, wishlists, and real-time updates for everyone in your party — no app install required for shared trip viewers. One trip code, everyone on the same page.</p>
-
-        <div class="fc-q">&ldquo;Trip code shared with 4 family members. Everyone can see the schedule and add notes &mdash; no app install needed.&rdquo;</div>
-
-      </div>
-
-    </div>
-
-    <div class="more-features">
-
-      <div class="mf-label">&#10022; And so much more</div>
-
-      <div class="mf-buckets">
-
-        <div class="mf-bucket">
-
-          <div class="mf-bucket-label">Family needs</div>
-
-          <div class="mf-bucket-items">
-
-            <div class="mf-item">Height &amp; age filtering</div>
-
-            <div class="mf-item">Character meet &amp; greet windows</div>
-
-            <div class="mf-item">Restroom break routing</div>
-
-          </div>
-
-        </div>
-
-        <div class="mf-bucket">
-
-          <div class="mf-bucket-label">Park timing</div>
-
-          <div class="mf-bucket-items">
-
-            <div class="mf-item">Show times &amp; parade reminders</div>
-
-            <div class="mf-item">Mobile order windows</div>
-
-            <div class="mf-item">Park hop planning</div>
-
-          </div>
-
-        </div>
-
-        <div class="mf-bucket">
-
-          <div class="mf-bucket-label">Trip sharing</div>
-
-          <div class="mf-bucket-items">
-
-            <div class="mf-item">Trip code group sharing</div>
-
-            <div class="mf-item">Photo op scheduling</div>
-
-            <div class="mf-item">No app install for viewers</div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ── BEFORE / AFTER (from A) ── -->
-
-<section class="compare-section">
-
-  <div class="cs-left">
-
-    <div class="cs-h">Save the hour that <em>changes your whole park day.</em></div>
-
-    <p>Families spend thousands on Disney trips and still lose hours in the wrong lines at the wrong times. Theme Park Co-Pilot watches every wait, knows every pattern, and quietly keeps your family one step ahead all day long.</p>
-
-    <div class="cs-pull"><strong>&ldquo;We saved over an hour of waiting on day one.</strong> My kids got to ride everything on their list. I don&rsquo;t know how we ever did Disney without it.&rdquo;</div>
-
-  </div>
-
-  <div>
-
-    <div class="cmp bad">
-
-      <div class="cmp-l">Without Theme Park Co-Pilot</div>
-
-      <div class="cmp-t">Arrived at Indiana Jones at 11 AM. 75-minute wait. Left without riding it. Lunch in peak crowds. Missed the afternoon parade. Only hit 6 rides all day.</div>
-
-      <div class="cmp-stat">6 rides</div>
-
-    </div>
-
-    <div class="cmp good">
-
-      <div class="cmp-l">With Theme Park Co-Pilot</div>
-
-      <div class="cmp-t">Theme Park Co-Pilot moved Indiana Jones to 2 PM when waits dropped to 18 min. Rode it twice. Caught the parade. Lunch at the quiet 11:30 window.</div>
-
-      <div class="cmp-stat">11 rides &nbsp;&#10022;&nbsp; ~47 min saved</div>
-
-    </div>
-
-    <div class="compare-photo">
-
-      <img src="https://app.themeparkcopilot.com/assets/brand/photo-family-cars-land.jpg" alt="Happy family celebrating at Disneyland Cars Land">
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ── SUPPORTED PARKS (new) ── -->
-
-<section class="parks" id="supported-parks">
-
-  <div class="parks-inner">
-
-    <div class="parks-eye">Supported parks</div>
-
-    <div class="parks-h">Where Theme Park Co-Pilot works today &mdash; and what&rsquo;s coming next.</div>
-
-    <div class="parks-grid">
-
-      <div class="park-pill live"><div class="dot"></div> Disneyland Resort <span style="font-size:10px;opacity:.6;margin-left:4px">(both parks)</span></div>
-
-      <div class="park-pill coming"><div class="dot"></div> Walt Disney World  <span style="font-size:10px;font-style:italic;opacity:.6">coming soon</span></div>
-
-      <div class="park-pill coming"><div class="dot"></div> Universal Studios Hollywood <span class="soon-tag">coming soon</span></div>
-
-      <div class="park-pill coming"><div class="dot"></div> Universal Orlando <span class="soon-tag">coming soon</span></div>
-
-    </div>
-
-    <p class="parks-note">Live wait times, AI scheduling, dining help, and park-day routing are available for Disneyland Resort. Additional parks, deeper character scheduling, and show reservation tools are on the roadmap.</p>
-
-  </div>
-
-</section>
-
-<!-- ── MID-PAGE CTA ── -->
-
-<div class="mid-cta">
-
-  <span class="mid-cta-text">Ready to plan your Disneyland day?</span>
-
-  <button class="mid-cta-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Start your free Disneyland trial &rarr;</button>
-
-</div>
-
-<!-- ── NARRATIVE STORY PANELS (from D) ── -->
-
-<div class="narrative">
-
-  <div class="story-panels">
-
-    <div class="sp dark">
-
-      <div class="sp-tag">Before you arrive</div>
-
-      <div class="sp-h">Your schedule is ready<br>before you leave <em>your house.</em></div>
-
-      <p class="sp-p">Theme Park Co-Pilot builds your complete day-by-day plan before the trip &mdash; optimized around crowd patterns, park hours, and your family&rsquo;s must-do rides. Share a trip code and everyone is on the same page before you even leave home.</p>
-
-      <div class="sp-pull"><strong>&ldquo;Day 1 is locked in.</strong> 11 rides, 2 dining stops, and a parade view. All ordered to minimize waiting.&rdquo;</div>
-
-    </div>
-
-    <div class="sp teal">
-
-      <div class="sp-tag">The moment you walk in</div>
-
-      <div class="sp-h">Live waits. Real routing.<br><em>No guesswork.</em></div>
-
-      <p class="sp-p">From the moment you enter the park, Theme Park Co-Pilot starts watching every wait time. When a ride spikes, it quietly reorders your day and tells you exactly why &mdash; in plain English, not algorithm-speak.</p>
-
-      <div class="sp-pull"><strong>&ldquo;Space Mountain is spiking &mdash; 75 min.</strong> Theme Park Co-Pilot moved it to 8 PM and added Star Tours now. Saves ~40 minutes.&rdquo;</div>
-
-    </div>
-
-    <div class="sp amber">
-
-      <div class="sp-tag">Midday, when crowds peak</div>
-
-      <div class="sp-h">Dining is built in.<br>Not an <em>afterthought.</em></div>
-
-      <p class="sp-p">The right restaurant at the right moment &mdash; before the rush, after a quiet window. Menu suggestions for picky eaters, vegetarians, and young kids. Character meet &amp; greet windows scheduled so nobody misses Mickey. No more wandering at noon wondering where to eat.</p>
-
-      <div class="sp-pull"><strong>&ldquo;11:30 AM is your window for Blue Bayou.</strong> Monte Cristo for the adults, Mac &amp; Cheese for the kids. Your 11:45 AM slot is free.&rdquo;</div>
-
-    </div>
-
-    <div class="sp coral">
-
-      <div class="sp-tag">End of the day</div>
-
-      <div class="sp-h"><em>More rides.</em> Less waiting.<br>More magic.</div>
-
-      <p class="sp-p">Families using Theme Park Co-Pilot can save up to 47 minutes of waiting per day. That&rsquo;s one more ride before close, a slower walk down Main Street, or just another Dole Whip. The moments you actually came for.</p>
-
-      <div class="sp-pull"><strong>&ldquo;We got to ride everything on the kids&rsquo; list.</strong> I don&rsquo;t know how we ever did Disney without it.&rdquo;</div>
-
-    </div>
-
-  </div>
-
-  <div class="sticky-col">
-
-    <div class="sticky-label">Live in the app</div>
-
-    <div class="sticky-phone">
-
-      <div class="sticky-notch"></div>
-
-      <div class="phone-inner" id="ph-sticky"></div>
-
-    </div>
-
-    <div class="slide-dots" id="dots-sticky">
-
-      <div class="slide-dot"></div><div class="slide-dot"></div>
-
-      <div class="slide-dot"></div><div class="slide-dot"></div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<!-- ── HOW CO-PILOT WORKS (new trust section) ── -->
-
-<section class="how" id="how-it-works">
-
-  <div class="how-inner">
-
-    <div class="how-eye">How it works</div>
-
-    <div class="how-h">Theme Park Co-Pilot combines everything you&rsquo;d need to research yourself.</div>
-
-    <p class="how-sub">Theme Park Co-Pilot combines your must-do list, park hours, live wait times, dining preferences, showtimes, and walking flow to recommend the next best move &mdash; before you even know you need it.</p>
-
-    <div class="how-grid">
-
-      <div class="how-step">
-
-        <div class="how-num">1</div>
-
-        <div class="how-ttl">Pick your park &amp; dates</div>
-
-        <div class="how-desc">Choose Disneyland Resort today, with Walt Disney World coming soon. Theme Park Co-Pilot calibrates to your exact visit &mdash; crowd patterns, park hours, must-dos, and your family&rsquo;s preferences.</div>
-
-      </div>
-
-      <div class="how-step">
-
-        <div class="how-num">2</div>
-
-        <div class="how-ttl">Get your custom schedule</div>
-
-        <div class="how-desc">AI builds a day-by-day plan around your group. Share a trip code so everyone is on the same page &mdash; no app install required.</div>
-
-      </div>
-
-      <div class="how-step">
-
-        <div class="how-num">3</div>
-
-        <div class="how-ttl">Ride more. Wait less.</div>
-
-        <div class="how-desc">On park day, Theme Park Co-Pilot watches live waits in real time, reroutes around spikes, and keeps your family one step ahead &mdash; all day long.</div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ── TESTIMONIALS ── -->
-
-<section class="proof" id="testimonials">
-
-  <div class="proof-inner">
-
-    <div class="proof-eye">What families are saying</div>
-
-    <div class="proof-with-photo">
-
-      <div class="proof-photo">
-
-        <img src="https://app.themeparkcopilot.com/assets/brand/photo-couple-castle.jpg" alt="Couple celebrating 20 years together at Disney">
-
-      </div>
-
-      <div class="tq feat">
-
-        <div class="tq-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-
-        <div class="tq-text">&ldquo;I stopped dreading the planning and actually started looking forward to our Disney trip. It felt like having a knowledgeable friend right there with us in the park &mdash; someone who always knew the next best move.&rdquo;</div>
-
-        <div class="tq-by">&mdash; Linnea C., mom of three, Disneyland</div>
-
-        <div class="tq-brand-line" style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(7,30,37,0.07)">Join families using Theme Park Co-Pilot to plan calmer, smarter Disneyland days.</div>
-
-        <div class="tq-sub"><a href="#cta" onclick="event.preventDefault();document.getElementById('cta').scrollIntoView({behavior:'smooth'})" style="color:#1A9E80;text-decoration:none;font-weight:700">Start your free trial &rarr;</a></div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ── FINAL CTA ── -->
-
-<section class="bottom-cta" id="cta">
-
-  <div class="cta-inner">
-
-    <img src="https://app.themeparkcopilot.com/assets/brand/logo-primary.svg" class="cta-logo" alt="Theme Park Co-Pilot">
-
-    <div class="cta-h">Your most <em>magical</em> day awaits.</div>
-
-    <p class="cta-sub">Free 7-day trial &middot; No credit card &middot; Works on any phone</p>
-
-    <p class="cta-trust">No confusing setup. No app install required for shared trip viewers. Cancel anytime.</p>
-
-    <div class="cta-form">
-
-      <input placeholder="First name" type="text">
-
-      <input placeholder="Email address" type="email">
-
-      <div class="park-tog">
-
-        <button class="on" onclick="this.classList.add('on');this.nextElementSibling.classList.remove('on')">Disneyland Resort</button>
-
-        <button disabled style="opacity:.35;cursor:not-allowed;border-color:rgba(255,255,255,0.08)">Walt Disney World  <span style="font-size:10px;font-style:italic">coming soon</span></button>
-
-      </div>
-
-      <button class="cta-btn">Start my free Disneyland trial &rarr;</button>
-
-      <p class="cta-fine">No credit card required &middot; Cancel anytime</p>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ── PRICING ── -->
-
-<section class="pricing-section" id="pricing">
-
-  <div class="pricing-hero-inner">
-
-    <div class="pricing-eyepill">
-
-      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1L7.2 4.3H10.7L7.95 6.35L8.95 9.65L6 7.7L3.05 9.65L4.05 6.35L1.3 4.3H4.8L6 1Z" fill="#ECA050"/></svg>
-
-      Plans &amp; Pricing
-
-    </div>
-
-    <h2>Your magic day deserves<br><em>a real plan.</em></h2>
-
-    <p>One trip or a whole year of adventures &mdash; there&rsquo;s a plan that fits.</p>
-
-    <div class="trialbanner">
-
-      <span class="greendot"></span>
-
-      Start free &mdash; <strong style="color:#fff;font-weight:800;margin:0 3px">7-day trial,</strong> no credit card required.
-
-    </div>
-
-  </div>
-
-  <!-- SINGLE TRIP -->
-
-  <div class="slbl">Just need one trip?</div>
-
-  <div class="stwrap">
-
-    <div class="stcard">
-
-      <div class="sticon">
-
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L10.6 6.8H15.8L11.6 9.6L13.2 14.4L9 11.6L4.8 14.4L6.4 9.6L2.2 6.8H7.4L9 2Z" stroke="#C86030" stroke-width="1.4" stroke-linejoin="round"/></svg>
-
-      </div>
-
-      <div class="stinfo">
-
-        <div class="stname">Single Trip</div>
-
-        <div class="sttag">One resort destination per trip. No subscription.</div>
-
-      </div>
-
-      <div class="stpills">
-
-        <div class="stpill">Full AI schedule</div>
-
-        <div class="stpill">Unlimited Ask AI &amp; wait routing</div>
-
-        <div class="stpill">10 AI Optimizations/day in-park</div>
-
-        <div class="stpill">Group codes included</div>
-
-        <div class="stpill">One resort destination per purchase</div>
-
-        <div class="stpill">Expires after trip dates</div>
-
-      </div>
-
-      <div class="stright">
-
-        <div class="stpricebox">
-
-          <div class="stamount">$29</div>
-
-          <div class="stper">per resort destination</div>
-
-        </div>
-
-        <button class="stbtn">Get started &rarr;</button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- SUBSCRIPTION PLANS -->
-
-  <div class="slbl">Coming back every year?</div>
-
-  <div class="plans">
-
-    <!-- FAMILY -->
-
-    <div class="pc feat">
-
-      <div class="popbadge">Most Popular</div>
-
-      <div class="picon teal">
-
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 7.5L8 2.5L14 7.5V13.5C14 13.78 13.78 14 13.5 14H10V10.5H6V14H2.5C2.22 14 2 13.78 2 13.5V7.5Z" stroke="#1A6860" stroke-width="1.5" stroke-linejoin="round"/></svg>
-
-      </div>
-
-      <div class="pname">Family</div>
-
-      <div class="ptag">1 active trip per resort destination at a time.</div>
-
-      <div class="price-block">
-
-        <div class="price-single">
-
-          <div class="ps-left">
-
-            <div class="ps-label">Annual &mdash; billed once a year</div>
-
-            <div class="ps-note">That&rsquo;s just $12.42/mo</div>
-
-          </div>
-
-          <div class="ps-right">
-
-            <div class="ps-amount-wrap">
-
-              <span class="ps-dollar">$</span>
-
-              <span class="ps-amount">149</span>
-
-              <span class="ps-per">/yr</span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <ul class="feats">
-
-        <li><span class="fck t"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-t" d="M1 2.5L2.8 4.5L6 1"/></svg></span>1 active trip per resort at a time</li>
-
-        <li><span class="fck t"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-t" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Full AI schedule &mdash; all days</li>
-
-        <li><span class="fck t"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-t" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Live wait time routing</li>
-
-        <li><span class="fck t"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-t" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Unlimited Ask AI &amp; wait routing</li>
-
-        <li><span class="fck t"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-t" d="M1 2.5L2.8 4.5L6 1"/></svg></span>AI Optimize &mdash; 15/day in-park</li>
-
-        <li><span class="fck t"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-t" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Group trip codes for everyone</li>
-
-        <li><span class="fck t"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-t" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Archived trips after dates pass</li>
-
-      </ul>
-
-      <div class="pdiv"></div>
-
-      <button class="pcta green">Start 7-day free trial &rarr;</button>
-
-      <div class="ctasub">No credit card required</div>
-
-    </div>
-
-    <!-- PRO -->
-
-    <div class="pc">
-
-      <div class="picon amb">
-
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9.5 1.5L4 9H8L6.5 14.5L13 7H9L9.5 1.5Z" stroke="#ECA050" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
-
-      </div>
-
-      <div class="pname">Pro</div>
-
-      <div class="ptag">For professional theme park planners. Up to 5 active trips.</div>
-
-      <div class="price-block">
-
-        <div class="price-dual">
-
-          <div class="price-row-item">
-
-            <div class="pri-left">
-
-              <div class="pri-label">Annual</div>
-
-              <div class="pri-note">Billed once a year &middot; $50/mo</div>
-
-            </div>
-
-            <div class="pri-right">
-
-              <div class="pri-amount-wrap">
-
-                <span class="pri-dollar">$</span>
-
-                <span class="pri-amount">599</span>
-
-                <span class="pri-per">/yr</span>
-
-              </div>
-
-              <span class="save-pill">Save $349</span>
-
-            </div>
-
-          </div>
-
-          <div class="price-row-item">
-
-            <div class="pri-left">
-
-              <div class="pri-label">Monthly</div>
-
-              <div class="pri-note">Cancel anytime</div>
-
-            </div>
-
-            <div class="pri-right">
-
-              <div class="pri-amount-wrap">
-
-                <span class="pri-dollar">$</span>
-
-                <span class="pri-amount">79</span>
-
-                <span class="pri-per">/mo</span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <ul class="feats">
-
-        <li><span class="fck a"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-a" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Up to 5 active trips at once</li>
-
-        <li><span class="fck a"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-a" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Unlimited Ask AI &amp; wait routing</li>
-
-        <li><span class="fck a"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-a" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Unlimited AI Optimize in-park</li>
-
-        <li><span class="fck a"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-a" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Multiple client trips simultaneously</li>
-
-        <li><span class="fck a"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-a" d="M1 2.5L2.8 4.5L6 1"/></svg></span>All archived trips preserved</li>
-
-        <li><span class="fck a"><svg width="7" height="5" viewBox="0 0 7 5" fill="none"><path class="ck-a" d="M1 2.5L2.8 4.5L6 1"/></svg></span>Priority access to new parks</li>
-
-      </ul>
-
-      <div class="pdiv"></div>
-
-      <button class="pcta ghost">Start 7-day free trial &rarr;</button>
-
-      <div class="ctasub">No credit card required</div>
-
-    </div>
-
-  </div>
-
-  <!-- TRIAL CAPTURE -->
-
-  <div class="slbl" style="padding-top:28px">Start Free</div>
-
-  <div class="trwrap">
-
-    <div class="trcard">
-
-      <div class="teyebrow">No Credit Card Required</div>
-
-      <h2>Try it free for 7 days</h2>
-
-      <p>Enter your email and we&rsquo;ll send your trip code instantly. Your first 2 days generate right away &mdash; upgrade anytime to unlock the full trip.</p>
-
-      <div class="tform">
-
-        <input type="email" class="tinput" placeholder="your@email.com" id="trial-email">
-
-        <button class="tbtn" onclick="submitTrial()">Start free trial &rarr;</button>
-
-      </div>
-
-      <div class="promo-visible">
-
-        <div class="promo-label">Have a promo code?</div>
-
-        <div class="promo-visible-row">
-
-          <input type="text" class="promoinput-visible" id="promo-input" placeholder="Enter promo code" maxlength="20">
-
-          <button class="promoapply-visible" onclick="applyPromo()">Apply</button>
-
-        </div>
-
-        <div class="promo-feedback" id="promo-feedback"></div>
-
-      </div>
-
-      <div class="ttrust">
-
-        <div class="titem">
-
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="rgba(255,255,255,0.32)" stroke-width="1.2" stroke-linecap="round"/></svg>
-
-          No credit card
-
-        </div>
-
-        <div class="tdot"></div>
-
-        <div class="titem">
-
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="rgba(255,255,255,0.32)" stroke-width="1.2" stroke-linecap="round"/></svg>
-
-          Trip code emailed instantly
-
-        </div>
-
-        <div class="tdot"></div>
-
-        <div class="titem">
-
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="rgba(255,255,255,0.32)" stroke-width="1.2" stroke-linecap="round"/></svg>
-
-          Email never shared
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="pricing-spacer"></div>
-
-  <!-- TRUST CARDS -->
-
-  <div class="trustgrid">
-
-    <div class="tcard">
-
-      <div class="ticon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#1A6860" stroke-width="1.3"/><path d="M4.5 7L6.5 9L9.5 5" stroke="#1A6860" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-
-      <div><div class="th4">Remaining days unlock instantly</div><div class="tp">Pay during or after your trial and all schedule days generate immediately.</div></div>
-
-    </div>
-
-    <div class="tcard">
-
-      <div class="ticon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2.5" y="5.5" width="9" height="6" rx="1.3" stroke="#1A6860" stroke-width="1.3"/><path d="M4.5 5.5V4C4.5 2.9 5.4 2 6.5 2h1C8.6 2 9.5 2.9 9.5 4v1.5" stroke="#1A6860" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-
-      <div><div class="th4">Your data stays private</div><div class="tp">Email stays on the landing page only. Your trip is tied to an anonymous code.</div></div>
-
-    </div>
-
-    <div class="tcard">
-
-      <div class="ticon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L8.3 5H12.5L9.1 7.2L10.4 10.7L7 8.5L3.6 10.7L4.9 7.2L1.5 5H5.7L7 1.5Z" stroke="#1A6860" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
-
-      <div><div class="th4">Works for the whole group</div><div class="tp">Every plan includes guest codes so everyone sees the same live schedule.</div></div>
-
-    </div>
-
-  </div>
-
-  <div class="pricing-spacer"></div>
-
-  <!-- FAQ -->
-
-  <div class="faqwrap">
-
-    <div class="faqhdr">Common questions</div>
-
-    <div class="faqitem" onclick="toggleFaq(this)">
-
-      <div class="faqq">What happens when my 7-day trial ends? <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="rgba(255,255,255,0.35)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-
-      <div class="faqa">If you haven&rsquo;t subscribed, you&rsquo;ll see a paywall prompt in the app. Your trial data and 2-day schedule are preserved &mdash; subscribe at any time to unlock the remaining days instantly.</div>
-
-    </div>
-
-    <div class="faqitem" onclick="toggleFaq(this)">
-
-      <div class="faqq">Why does the trial only generate 2 days? <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="rgba(255,255,255,0.35)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-
-      <div class="faqa">The 2-day limit lets you fully experience the app &mdash; live wait routing, AI Optimize, and contextual scheduling all work on your real trip days. Remaining days generate the moment you subscribe.</div>
-
-    </div>
-
-    <div class="faqitem" onclick="toggleFaq(this)">
-
-      <div class="faqq">Does one plan cover a whole resort? <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="rgba(255,255,255,0.35)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-
-      <div class="faqa">Yes &mdash; one trip covers the whole resort. Disneyland Resort (both parks) counts as one trip. Walt Disney World (all four parks) counts as one trip. Visiting both on the same vacation is two separate trips.</div>
-
-    </div>
-
-    <div class="faqitem" onclick="toggleFaq(this)">
-
-      <div class="faqq">Can my whole family use one subscription? <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="rgba(255,255,255,0.35)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-
-      <div class="faqa">Yes. Every plan includes both an admin trip code and guest codes for your whole group. Everyone sees the same real-time schedule on their own device &mdash; no extra charge per person.</div>
-
-    </div>
-
-    <div class="faqitem" onclick="toggleFaq(this)">
-
-      <div class="faqq">What parks are supported? <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="rgba(255,255,255,0.35)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-
-      <div class="faqa">Disneyland Resort and Walt Disney World are live at launch. Universal Studios Hollywood, Universal Orlando, and more are coming soon.</div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<footer>
-
-  <div class="footer-left">
-
-    <img src="https://app.themeparkcopilot.com/assets/brand/logo-white.svg" alt="Theme Park Co-Pilot" style="height:26px;border-radius:6px;">
-
-    <span class="footer-copy">&copy; 2026 Lunchbox Dad, LLC. All rights reserved.</span>
-
-    <a href="mailto:hello@themeparkcopilot.com" class="footer-support">hello@themeparkcopilot.com</a>
-
-  </div>
-
-  <div class="footer-legal">
-
-    Theme Park Co-Pilot is an independent planning tool and is not affiliated with, endorsed by, or sponsored by Disney, Universal, or their parent companies. Disney, Disneyland, Walt Disney World, and related marks are trademarks of The Walt Disney Company. Universal Studios is a trademark of Universal City Studios LLC.
-
-  </div>
-
-</footer>
-
-<script>
-
-const SLIDES = [
-
-  `<div class="pm-header">
-
-    <div class="pm-eye">THEME PARK CO-PILOT</div>
-
-    <div class="pm-ttl">Johnson Family &middot; Disneyland</div>
-
-    <div class="pm-sub">Jun 14&ndash;16 &middot; 26 days to go</div>
-
-    <div class="pm-tabs"><span class="t active">Day 1</span><span class="t">Day 2</span><span class="t">Day 3</span></div>
-
-  </div>
-
-  <div class="pm-body">
-
-    <div class="pm-cta">&#10022; AI Optimize Your Schedule <span>&#8594;</span></div>
-
-    <div class="pm-card"><div class="tm">8:15<small>AM</small></div><div class="cn">Pirates of Caribbean</div><span class="badge ride">ride</span><span class="pill lo">12m</span></div>
-
-    <div class="pm-card accent"><div class="tm">9:00<small>AM</small></div><div class="cn">Castle Photo Op</div><span class="badge photo">photo</span></div>
-
-    <div class="pm-card"><div class="tm">9:30<small>AM</small></div><div class="cn">Haunted Mansion</div><span class="badge ride">ride</span><span class="pill mid">35m</span></div>
-
-    <div class="pm-card"><div class="tm">10:15<small>AM</small></div><div class="cn">Space Mountain</div><span class="badge ride">ride</span><span class="pill hi">75m</span></div>
-
-    <div class="pm-card snack"><div class="tm">11:00<small>AM</small></div><div class="cn">Dole Whip Stop</div><span class="badge snk">snack</span></div>
-
-  </div>
-
-  <div class="pm-nav"><span class="ni active">Schedule</span><span class="ni">Waits</span><span class="ni">Shows</span><span class="ni">Ask AI</span><span class="ni">Info</span></div>`,
-
-  `<div class="pm-header" style="background:#071E25">
-
-    <div class="pm-eye">AI OPTIMIZE</div>
-
-    <div class="pm-ttl">Your new schedule</div>
-
-    <div class="pm-sub">Day 1 &middot; Disneyland</div>
-
-  </div>
-
-  <div class="pm-body">
-
-    <div class="pm-savebar">&#10022; Smoothed your morning <strong>~47 min saved</strong></div>
-
-    <div class="pm-card changed"><div class="tm" style="color:#1A6860">8:15<small>AM</small></div><div class="cn">Pirates of Caribbean</div><span class="chip up">moved up</span></div>
-
-    <div class="pm-card changed"><div class="tm" style="color:#1A6860">9:30<small>AM</small></div><div class="cn">Indiana Jones Adv.</div><span class="chip up">moved up</span></div>
-
-    <div class="pm-card muted"><div class="tm">10:15<small>AM</small></div><div class="cn">Haunted Mansion</div></div>
-
-    <div class="pm-card changed"><div class="tm" style="color:#1A6860">2:00<small>PM</small></div><div class="cn">Space Mountain</div><span class="chip late">moved later</span></div>
-
-    <div class="pm-actions"><button class="acc">Accept new schedule</button><button class="kp">Keep current</button></div>
-
-  </div>`,
-
-  `<div class="pm-header">
-
-    <div class="pm-eye">THEME PARK CO-PILOT</div>
-
-    <div class="pm-ttl">Live Wait Times</div>
-
-    <div class="pm-sub">Disneyland &middot; Updated 2 min ago</div>
-
-    <div class="pm-tabs"><span class="t">Schedule</span><span class="t active">Waits</span><span class="t">Shows</span></div>
-
-  </div>
-
-  <div class="pm-body">
-
-    <div class="wt-row"><div class="wn">Pirates of Caribbean</div><span class="pill lo">12m</span></div>
-
-    <div class="wt-row"><div class="wn">Haunted Mansion</div><span class="pill mid">35m</span></div>
-
-    <div class="wt-row alert"><div class="wn">Space Mountain &#9888;</div><span class="pill hi">75m</span></div>
-
-    <div class="wt-row alert"><div class="wn">Indiana Jones</div><span class="pill hi">68m</span></div>
-
-    <div class="wt-row"><div class="wn">Matterhorn</div><span class="pill mid">22m</span></div>
-
-    <div class="wt-row"><div class="wn">Big Thunder Railroad</div><span class="pill lo">8m</span></div>
-
-    <div class="wt-ai">Theme Park Co-Pilot: Space Mtn moved to 8 PM &mdash; drops to 18 min</div>
-
-  </div>
-
-  <div class="pm-nav"><span class="ni">Schedule</span><span class="ni active">Waits</span><span class="ni">Shows</span><span class="ni">Ask AI</span><span class="ni">Info</span></div>`,
-
-  `<div class="pm-header">
-
-    <div class="pm-eye">THEME PARK CO-PILOT</div>
-
-    <div class="pm-ttl">Ask AI</div>
-
-    <div class="pm-sub">Your personal park expert</div>
-
-  </div>
-
-  <div class="pm-body chat">
-
-    <div class="bubble user">Best time for Indiana Jones?</div>
-
-    <div class="bubble ai">Waits peak now at 68 min. Best windows: <strong>before 9:15 AM</strong> or after <strong>2 PM</strong> — already moved it on your schedule. &#127913;</div>
-
-    <div class="bubble user">Lunch near Adventureland?</div>
-
-    <div class="bubble ai">Blue Bayou: book now, 11:30 AM slots left. Bengal Barbecue has short lines before noon &mdash; great skewers for picky kids. &#127958;</div>
-
-    <div class="chat-input"><span>Ask anything...</span><button>&#8594;</button></div>
-
-  </div>
-
-  <div class="pm-nav"><span class="ni">Schedule</span><span class="ni">Waits</span><span class="ni">Shows</span><span class="ni active">Ask AI</span><span class="ni">Info</span></div>`
-
-];
-
-function initSlideshow(phoneId, dotsId, startIndex, ms) {
-
-  var cur = startIndex || 0;
-
-  var phone = document.getElementById(phoneId);
-
-  var dotsEl = dotsId ? document.getElementById(dotsId) : null;
-
-  if (!phone) return;
-
-  function show(i) {
-
-    cur = i;
-
-    phone.style.opacity = '0';
-
-    setTimeout(function() {
-
-      phone.innerHTML = SLIDES[i];
-
-      phone.style.opacity = '1';
-
-      if (dotsEl) dotsEl.querySelectorAll('.slide-dot').forEach(function(d,j){ d.classList.toggle('active', j===i); });
-
-    }, 180);
-
-  }
-
-  show(cur);
-
-  setInterval(function(){ show((cur+1) % SLIDES.length); }, ms || 3000);
-
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  initSlideshow('ph-hero', 'dots-hero', 0, 3000);
-
-  initSlideshow('ph-sticky', 'dots-sticky', 1, 3400);
-
-});
-
-  // ── PRICING ──
-
-  const PROMO_CODES = {
-
-    'LAUNCH25':  { discount: 0.25, label: '25% off' },
-
-    'LAUNCH50':  { discount: 0.50, label: '50% off' },
-
-    'MAGIC2026': { discount: 0.20, label: '20% off' },
-
-  };
-
-  let activePromo = null;
-
-  function applyPromo() {
-
-    const raw = document.getElementById('promo-input').value.trim().toUpperCase();
-
-    const feedback = document.getElementById('promo-feedback');
-
-    const input = document.getElementById('promo-input');
-
-    if (!raw) return;
-
-    const promo = PROMO_CODES[raw];
-
-    if (!promo) {
-
-      input.style.borderColor = 'rgba(200,96,48,0.70)';
-
-      feedback.className = 'promo-feedback error';
-
-      feedback.textContent = "That code isn't valid — double-check and try again.";
-
-      setTimeout(() => { input.style.borderColor = ''; }, 1500);
-
-      return;
+  <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>Theme Park Co-Pilot &mdash; Coming Soon</title>
+  
+  <meta name="description" content="A calmer way to plan Disneyland is almost here. Join the early access list.">
+  
+    <!-- Open Graph / Social sharing -->
+  
+    <meta property="og:type" content="website">
+  
+    <meta property="og:url" content="https://themeparkcopilot.com">
+  
+    <meta property="og:title" content="Theme Park Co-Pilot — Smarter days. More magic.">
+  
+    <meta property="og:description" content="A calmer, less stressful way to plan your visits to Disneyland Resort, Walt Disney World, and Universal Studios. Coming soon — join the early access list.">
+  
+    <meta property="og:image" content="https://app.themeparkcopilot.com/assets/brand/landing-photo-hero.svg">
+  
+    <meta property="og:image:width" content="1066">
+  
+    <meta property="og:image:height" content="1600">
+  
+    <!-- Twitter card -->
+  
+    <meta name="twitter:card" content="summary_large_image">
+  
+    <meta name="twitter:title" content="Theme Park Co-Pilot — Smarter days. More magic.">
+  
+    <meta name="twitter:description" content="A calmer, less stressful way to plan your visits to Disneyland Resort, Walt Disney World, and Universal Studios. Coming soon.">
+  
+    <meta name="twitter:image" content="https://app.themeparkcopilot.com/assets/brand/landing-photo-hero.svg">
+  
+    <link rel="icon" type="image/png" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
+  
+    <link rel="apple-touch-icon" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700;1,900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+
+    *, ::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body { font-family: 'Outfit', sans-serif; background: #071E25; color: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    input, button { font-family: inherit; }
+
+    input::placeholder { color: rgba(255,255,255,0.32); }
+
+    /* NAV */
+
+    .nav {
+
+        height: 56px; display: flex; align-items: center;
+
+        justify-content: space-between; padding: 0 48px;
+
+        background: rgba(7,30,37,0.97);
+
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+
+        position: sticky; top: 0; z-index: 100;
 
     }
 
-    activePromo = { code: raw, ...promo };
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 
-    input.style.borderColor = 'rgba(26,104,96,0.80)';
+    .nav-logo img { height: 32px; width: 32px; border-radius: 7px; object-fit: cover; }
 
-    feedback.className = 'promo-feedback success';
+    .nav-wm { font-size: 14px; font-weight: 900; color: #fff; letter-spacing: -.3px; }
 
-    feedback.textContent = '\u2713 ' + promo.label + ' applied!';
+    .nav-wm span { color: #F5A623; }
 
-    setTimeout(() => {
+    .nav-cta {
 
-      promoOpen = false;
+        background: #F5A623; color: #071E25; border: none;
 
-      document.getElementById('promo-row').classList.remove('open');
+        border-radius: 22px; padding: 9px 22px;
 
-      
-
-    }, 1000);
-
-  }
-
-  function submitTrial() {
-
-    const email = document.getElementById('trial-email').value.trim();
-
-    if (!email || !email.includes('@')) {
-
-      document.getElementById('trial-email').style.borderColor = 'rgba(200,96,48,0.70)';
-
-      setTimeout(() => { document.getElementById('trial-email').style.borderColor = ''; }, 2000);
-
-      return;
+        font-size: 12px; font-weight: 800; cursor: pointer;
 
     }
 
-    const btn = document.querySelector('.tbtn');
+    /* HERO — true 3 columns */
 
-    btn.textContent = 'Sending\u2026';
+    .hero {
 
-    btn.disabled = true;
+        display: grid;
 
-    setTimeout(() => {
+        grid-template-columns: 38% 1fr 260px;
 
-      btn.textContent = 'Check your email \u2713';
+        height: calc(100vh - 56px);
 
-      btn.style.background = '#1A6860';
+        min-height: 580px;
 
-      document.getElementById('trial-email').value = '';
+    }
 
-    }, 1200);
+    /* Col 1: Photo */
 
-  }
+    .hero-photo { position: relative; overflow: hidden; }
 
-  function toggleFaq(item) {
+    .hero-photo img {
 
-    const wasOpen = item.classList.contains('open');
+        width: 100%; height: 100%;
 
-    document.querySelectorAll('.faqitem.open').forEach(el => el.classList.remove('open'));
+        object-fit: cover; object-position: center center;
 
-    if (!wasOpen) item.classList.add('open');
+        display: block;
 
-  }
+    }
 
-  document.addEventListener('DOMContentLoaded', function() {
+    .hero-photo::after {
 
-    const pi = document.getElementById('promo-input');
+        content: ''; position: absolute;
 
-    if (pi) pi.addEventListener('keydown', function(e) { if (e.key === 'Enter') applyPromo(); });
+        top: 0; right: 0; bottom: 0; width: 80px;
 
-  });
+        background: linear-gradient(to right, transparent, #071E25);
 
-</script>
+    }
 
-</body>
+    /* Col 2: Copy */
 
-</html>
+    .hero-copy {
+
+        padding: 48px 56px 48px 52px;
+
+        display: flex; flex-direction: column; justify-content: center;
+
+        background: #071E25;
+
+    }
+
+    /* Coming soon badge */
+
+    .cs-badge {
+
+        display: inline-flex; align-items: center; gap: 8px;
+
+        margin-bottom: 16px; font-size: 11px;
+
+        color: rgba(255,255,255,0.5); font-weight: 600;
+
+    }
+
+    .cs-dot {
+
+        width: 7px; height: 7px; border-radius: 50%;
+
+        background: #F5A623; flex-shrink: 0;
+
+        box-shadow: 0 0 8px rgba(245,166,35,0.7);
+
+        animation: pulse 2s ease-in-out infinite;
+
+    }
+
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(1.3); } }
+
+    .cs-badge strong { color: rgba(255,255,255,0.85); font-weight: 700; }
+
+    /* Logo lockup */
+
+    .hero-lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+
+    .hero-lockup img { width: 60px; height: 60px; border-radius: 13px; object-fit: cover; flex-shrink: 0; }
+
+    .hero-lockup-name { font-size: 21px; font-weight: 900; color: #fff; letter-spacing: -.4px; line-height: 1; }
+
+    .hero-lockup-name span { color: #F5A623; }
+
+    .hero-lockup-tag { font-size: 9px; font-weight: 700; color: rgba(245,166,35,0.55); letter-spacing: .18em; text-transform: uppercase; margin-top: 4px; }
+
+    /* Headline */
+
+    .hero-h {
+
+        font-family: 'Fraunces', serif;
+
+        font-size: 58px; line-height: .92;
+
+        color: #fff; margin-bottom: 14px; letter-spacing: -.5px;
+
+    }
+
+    .hero-h em { font-style: italic; color: #F5A623; }
+
+    /* Tagline */
+
+    .hero-tagline {
+
+        font-size: 15px; color: rgba(255,255,255,0.48);
+
+        line-height: 1.68; max-width: 480px; margin-bottom: 14px;
+
+    }
+
+    /* Tease line */
+
+    .tease-line {
+
+        font-family: 'Fraunces', serif; font-size: 15px;
+
+        font-style: italic; color: rgba(255,255,255,0.35);
+
+        margin-bottom: 22px; line-height: 1.5; max-width: 480px;
+
+    }
+
+    .tease-line strong { color: rgba(245,166,35,0.75); font-style: normal; }
+
+    /* Email form */
+
+    .email-form {
+
+        display: flex; max-width: 480px;
+
+        background: rgba(255,255,255,0.07);
+
+        border: 1px solid rgba(255,255,255,0.14);
+
+        border-radius: 12px; padding: 4px; margin-bottom: 8px;
+
+    }
+
+    .email-form input {
+
+        flex: 1; background: transparent; border: none;
+
+        padding: 11px 14px; font-size: 14px; color: #fff; outline: none;
+
+    }
+
+    .email-form button {
+
+        background: #C86030; color: #fff; border: none;
+
+        border-radius: 9px; padding: 11px 20px;
+
+        font-size: 13px; font-weight: 800; cursor: pointer; white-space: nowrap;
+
+    }
+
+    .email-fine { font-size: 10px; color: rgba(255,255,255,0.22); }
+
+    /* Col 3: Benefits */
+
+    .hero-benefits {
+
+        background: #0A2D33;
+
+        border-left: 1px solid rgba(255,255,255,0.07);
+
+        display: flex; flex-direction: column;
+
+        justify-content: center; padding: 48px 32px; gap: 0;
+
+    }
+
+    .hb-item {
+
+        padding: 22px 0;
+
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+
+    }
+
+    .hb-item:last-child { border-bottom: none; }
+
+    .hb-big {
+
+        font-family: 'Fraunces', serif;
+
+        font-size: 26px; font-style: italic;
+
+        color: #fff; line-height: 1; margin-bottom: 5px;
+
+    }
+
+    .hb-small { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* FOOTER */
+
+    footer {
+
+        background: #030C10; padding: 16px 48px;
+
+        display: flex; align-items: center;
+
+        justify-content: space-between; flex-wrap: wrap; gap: 10px;
+
+        border-top: 1px solid rgba(255,255,255,0.06);
+
+    }
+
+    .footer-left { display: flex; align-items: center; gap: 10px; }
+
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 500; }
+
+    .footer-legal { font-size: 10px; color: rgba(255,255,255,0.18); line-height: 1.4; text-align: right; max-width: 540px; }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+
+        .nav { padding: 0 20px; }
+
+        .hero { grid-template-columns: 1fr; height: auto; min-height: auto; }
+
+        .hero-photo { min-height: 300px; max-height: 360px; }
+
+        .hero-photo::after { background: linear-gradient(to bottom, transparent, #071E25); right: 0; left: 0; top: auto; height: 80px; width: 100%; }
+
+        .hero-copy { padding: 36px 24px 40px; }
+
+        .hero-h { font-size: 40px; }
+
+        .hero-tagline, .tease-line { max-width: 100%; }
+
+        .email-form { max-width: 100%; }
+
+        .hero-benefits { border-left: none; border-top: 1px solid rgba(255,255,255,0.07); flex-direction: row; padding: 24px 20px; }
+
+        .hb-item { flex: 1; border-bottom: none; border-right: 1px solid rgba(255,255,255,0.07); padding: 0 12px; text-align: center; }
+
+        .hb-item:last-child { border-right: none; }
+
+        .hb-big { font-size: 18px; }
+
+        footer { padding: 16px 20px; flex-direction: column; text-align: center; }
+
+        .footer-legal { text-align: center; }
+
+    }
+
+    @media (max-width: 640px) {
+
+        .hero-h { font-size: 34px; }
+
+        .hero-lockup-name { font-size: 17px; }
+
+        .hero-lockup img { width: 44px; height: 44px; }
+
+        .hero-benefits { flex-direction: column; }
+
+        .hb-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 16px 0; text-align: left; }
+
+        .hb-item:last-child { border-bottom: none; }
+
+    }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <nav class="nav">
+
+        <a class="nav-logo" href="#">
+
+              <img src="https://app.themeparkcopilot.com/assets/brand/logo-primary.svg" alt="Theme Park Co-Pilot">
+
+              <span class="nav-wm">Theme Park Co<span>&#10022;</span>Pilot</span>
+        
+        </a>a>
+    
+      <button class="nav-cta" onclick="document.getElementById('signup-email').focus()">Get early access</button>button>
+    
+    </nav>nav>
+  
+  <section class="hero">
+  
+    <!-- Col 1: Photo -->
+  
+    <div class="hero-photo">
+    
+        <img src="https://app.themeparkcopilot.com/assets/brand/landing-photo-hero.svg" alt="Family enjoying a magical theme park day">
+    
+    </div>div>
+  
+    <!-- Col 2: Copy + form -->
+  
+    <div class="hero-copy">
+    
+        <div class="cs-badge">
+        
+              <div class="cs-dot"></div>div>
+        
+              <span>Coming soon &nbsp;&middot;&nbsp; <strong>Disneyland Resort</strong></span>
+        
+        </div>div>
+    
+        <div class="hero-lockup">
+        
+              <img src="https://app.themeparkcopilot.com/assets/brand/logo-primary.svg" alt="Theme Park Co-Pilot">
+        
+              <div>
+
+                        <div class="hero-lockup-name">Theme Park Co<span>&#10022;</span>Pilot</div>
+
+                        <div class="hero-lockup-tag">AI-Powered Theme Park Guide</div>
+
+              </div>
+
+        </div>
+
+          <div class="hero-h">Smarter days.<br><em>More magic.</em></div>
+    
+        <p class="hero-tagline">Your AI theme park guide builds your plan, watches live wait times, and helps your family and friends make the next best move all day &mdash; so you ride more, wait less, and enjoy the moments you came for.</p>p>
+    
+        <p class="tease-line">A calmer, less stressful way to plan your visits to Disneyland Resort, Walt Disney World, and Universal Studios is almost here.<br><strong>Be first to know.</strong></p>p>
+    
+        <div class="email-form" id="signup-form">
+        
+              <input placeholder="Your email address" type="email" id="signup-email">
+        
+              <button onclick="handleSignup(event)">Get early access &rarr;</button>button>
+        
+        </div>
+    
+        <div class="email-fine" id="signup-fine">No spam &middot; Launch announcement only &middot; Unsubscribe anytime</div>
+    
+    </div>
+  
+    <!-- Col 3: Benefits -->
+  
+    <div class="hero-benefits">
+    
+        <div class="hb-item">
+        
+              <div class="hb-big">Less waiting.</div>
+        
+              <div class="hb-small">More of the park you came for</div>
+        
+        </div>
+    
+        <div class="hb-item">
+        
+              <div class="hb-big">Less guessing.</div>
+        
+              <div class="hb-small">Every move planned and adjusted live</div>
+        
+        </div>
+    
+        <div class="hb-item">
+        
+              <div class="hb-big">Less stress.</div>
+        
+              <div class="hb-small">So everyone can actually enjoy the day</div>
+        
+        </div>
+    
+    </div>
+  
+  </section>section>
+  
+  <footer>
+
+      <div class="footer-left">
+
+            <img src="https://app.themeparkcopilot.com/assets/brand/logo-white.svg" style="height:24px;border-radius:6px" alt="Theme Park Co-Pilot">
+
+            <span class="footer-copy">&copy; 2026 Lunchbox Dad, LLC. All rights reserved.</span>
+
+      </div>
+
+      <span class="footer-legal">Theme Park Co-Pilot is an independent planning tool and is not affiliated with, endorsed by, or sponsored by Disney, Universal, or their parent companies. Disney, Disneyland, Walt Disney World, and related marks are trademarks of The Walt Disney Company.</span>
+
+  </footer>
+
+    <script>
+
+      async function handleSignup(e) {
+
+          e.preventDefault();
+
+          const input = document.getElementById('signup-email');
+
+          const fine  = document.getElementById('signup-fine');
+
+          const btn   = e.target;
+
+          const email = input.value.trim();
+
+          if (!email || !email.includes('@')) {
+
+                fine.textContent = 'Please enter a valid email address.';
+
+                fine.style.color = '#ECA050';
+
+                return;
+
+          }
+
+          btn.textContent = 'Adding you...';
+
+          btn.disabled = true;
+
+          try {
+
+                const res = await fetch('https://disney-wait-times-lupt.vercel.app/api/subscribe', {
+
+                        method: 'POST',
+
+                        headers: { 'Content-Type': 'application/json' },
+
+                        body: JSON.stringify({ email }),
+
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+
+                        document.getElementById('signup-form').innerHTML =
+
+                                  '<div style="font-size:15px;font-weight:700;color:#fff;padding:12px 0">&#10022; You\'re on the list. We\'ll be in touch.</div>';
+
+                        fine.textContent = "We'll email you the moment Theme Park Co-Pilot launches.";
+
+                        fine.style.color = 'rgba(255,255,255,0.4)';
+
+                } else {
+
+                        throw new Error(data.error || 'Unknown error');
+
+                }
+
+          } catch (err) {
+
+                btn.textContent = 'Get early access \u2192';
+
+                btn.disabled = false;
+
+                fine.textContent = 'Something went wrong \u2014 please try again.';
+
+                fine.style.color = '#ECA050';
+
+          }
+
+      }
+
+    </script>
+
+  </body>
+
+</html>html>
+    </script>
+  </footer></strong></em>
+              </div></strong></span></span>
+  </body>
+  </style></title>
+  </head>
