@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Theme Park Planning Tips & Guides — Theme Park Co-Pilot Blog</title>
+<meta name="description" content="Expert Disneyland and Walt Disney World planning guides. Rope drop strategy, Lightning Lane tips, crowd calendars, and everything your family needs for a smarter park day.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://themeparkcopilot.com/blog">
+<meta property="og:title" content="Theme Park Planning Tips & Guides — Theme Park Co-Pilot">
+<meta property="og:description" content="Expert Disneyland and Walt Disney World planning guides. Rope drop strategy, Lightning Lane tips, crowd calendars, and more.">
+<meta property="og:image" content="https://app.themeparkcopilot.com/assets/brand/landing-photo-hero.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Theme Park Planning Tips & Guides — Theme Park Co-Pilot">
+<meta name="twitter:description" content="Expert Disneyland and Walt Disney World planning guides.">
+<link rel="icon" type="image/png" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
+<link rel="apple-touch-icon" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
+<link rel="canonical" href="https://themeparkcopilot.com/blog">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700;1,900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Schema markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Theme Park Co-Pilot Blog",
+  "description": "Expert Disneyland and Walt Disney World planning guides.",
+  "url": "https://themeparkcopilot.com/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Theme Park Co-Pilot",
+    "url": "https://themeparkcopilot.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://app.themeparkcopilot.com/assets/brand/logo-primary.svg"
+    }
+  }
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+.nav {
+  background: #071E25;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.nav-left { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-icon {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(212,168,48,0.3);
+  flex-shrink: 0;
+}
+.nav-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nav-wordmark { font-size: 13px; font-weight: 800; color: #fff; letter-spacing: -0.2px; }
+.nav-wordmark span { color: #F5A623; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-link { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); text-decoration: none; }
+.nav-link.active { color: #F5A623; }
+.nav-cta {
+  font-size: 11px; font-weight: 700;
+  color: #071E25; background: #F5A623;
+  padding: 7px 16px; border-radius: 100px;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  background: #071E25;
+  padding: 48px 40px 44px;
+}
+.hero-eyebrow {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #F5A623; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1.5px;
+  background: #F5A623;
+}
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-size: 42px; font-weight: 900;
+  color: #fff; line-height: 1.05;
+  letter-spacing: -0.5px; margin-bottom: 10px;
+}
+.hero-title em { color: #F5A623; font-style: italic; }
+.hero-sub {
+  font-size: 13px; color: rgba(255,255,255,0.45);
+  max-width: 480px; line-height: 1.55;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  background: #fff;
+  padding: 12px 40px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  border-bottom: 0.5px solid rgba(7,30,37,0.08);
+  position: sticky; top: 56px; z-index: 90;
+}
+.filter-pill {
+  font-size: 10px; font-weight: 700;
+  padding: 6px 14px; border-radius: 100px;
+  border: 0.5px solid rgba(7,30,37,0.15);
+  color: #4A7A7C; background: transparent;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.15s;
+}
+.filter-pill:hover { background: #EEF5F4; }
+.filter-pill.active { background: #071E25; color: #fff; border-color: #071E25; }
+
+/* POST GRID */
+.post-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 40px 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* FEATURED — spans 2 cols */
+.post-featured {
+  grid-column: span 2;
+  background: #fff;
+  border-radius: 14px;
+  border: 0.5px solid rgba(7,30,37,0.07);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.post-featured:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(7,30,37,0.10); }
+
+.featured-img {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+.featured-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.featured-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(7,30,37,0.5) 0%, transparent 50%);
+}
+.featured-badge {
+  position: absolute; bottom: 14px; left: 14px;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: #C86030; color: #fff;
+  padding: 4px 10px; border-radius: 100px;
+}
+.featured-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+.post-tag {
+  font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 7px;
+}
+.tag-dl { color: #1A6860; }
+.tag-wdw { color: #B8860B; }
+.featured-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 900;
+  color: #071E25; line-height: 1.15;
+  letter-spacing: -0.2px; margin-bottom: 8px;
+}
+.featured-excerpt {
+  font-size: 11px; color: #4A7A7C;
+  line-height: 1.55; flex: 1;
+}
+.post-footer {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-top: 14px; padding-top: 12px;
+  border-top: 0.5px solid rgba(7,30,37,0.07);
+}
+.post-meta { font-size: 9px; color: #8AACAE; }
+.read-more { font-size: 10px; font-weight: 700; color: #1A6860; }
+
+/* STANDARD CARD */
+.post-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 0.5px solid rgba(7,30,37,0.07);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(7,30,37,0.10); }
+
+.card-img {
+  height: 130px; overflow: hidden; position: relative;
+}
+.card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(7,30,37,0.4) 0%, transparent 60%);
+}
+.card-tag-abs {
+  position: absolute; bottom: 10px; left: 10px;
+  font-size: 7px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 3px 8px; border-radius: 100px;
+}
+.tag-abs-dl { background: rgba(26,104,96,0.92); color: #E0F5EE; }
+.tag-abs-wdw { background: rgba(184,134,11,0.92); color: #FFF8E0; }
+
+.card-body { padding: 13px 15px 15px; flex: 1; display: flex; flex-direction: column; }
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15px; font-weight: 900;
+  color: #071E25; line-height: 1.2;
+  letter-spacing: -0.1px; margin-bottom: 6px;
+}
+.card-excerpt { font-size: 10px; color: #4A7A7C; line-height: 1.5; flex: 1; }
+.card-footer {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-top: 12px; padding-top: 10px;
+  border-top: 0.5px solid rgba(7,30,37,0.06);
+}
+.card-meta { font-size: 8px; color: #8AACAE; }
+.card-read { font-size: 9px; font-weight: 700; color: #1A6860; }
+
+/* NEWSLETTER */
+.newsletter {
+  background: #071E25;
+  margin: 0 40px 48px;
+  max-width: 1020px;
+  margin-left: auto; margin-right: auto;
+  border-radius: 14px;
+  padding: 28px 32px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 24px;
+}
+.newsletter-eyebrow {
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: #F5A623; margin-bottom: 6px;
+}
+.newsletter-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 900;
+  color: #fff; line-height: 1.1;
+}
+.newsletter-title em { color: #F5A623; font-style: italic; }
+.newsletter-form { display: flex; gap: 10px; flex-shrink: 0; }
+.newsletter-input {
+  font-size: 12px; font-family: 'Outfit', sans-serif;
+  padding: 10px 16px; border-radius: 9px;
+  border: 0.5px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.07);
+  color: #fff; width: 210px; outline: none;
+}
+.newsletter-input::placeholder { color: rgba(255,255,255,0.30); }
+.newsletter-btn {
+  font-size: 11px; font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  padding: 10px 20px; border-radius: 9px;
+  background: #C86030; color: #fff;
+  border: none; cursor: pointer; white-space: nowrap;
+}
+
+/* FOOTER */
+.footer {
+  background: #071E25;
+  padding: 20px 40px;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.footer-left { font-size: 10px; color: rgba(255,255,255,0.30); }
+.footer-right { display: flex; gap: 16px; }
+.footer-link { font-size: 10px; color: rgba(255,255,255,0.30); text-decoration: none; }
+.footer-link:hover { color: rgba(255,255,255,0.60); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .post-grid { grid-template-columns: 1fr 1fr; padding: 20px 20px 40px; }
+  .post-featured { grid-column: span 2; }
+  .hero { padding: 36px 20px 32px; }
+  .hero-title { font-size: 32px; }
+  .filter-bar { padding: 10px 20px; }
+  .newsletter { margin: 0 20px 40px; flex-direction: column; align-items: flex-start; }
+  .newsletter-form { width: 100%; }
+  .newsletter-input { flex: 1; }
+  .nav { padding: 0 20px; }
+  .footer { padding: 16px 20px; flex-direction: column; gap: 10px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .post-grid { grid-template-columns: 1fr; }
+  .post-featured { grid-column: span 1; }
+  .nav-right .nav-link { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a href="https://themeparkcopilot.com" class="nav-left">
+    <div class="nav-icon">
+      <img src="https://app.themeparkcopilot.com/assets/brand/favicon.PNG" alt="Theme Park Co-Pilot">
+    </div>
+    <div class="nav-wordmark">Theme Park Co<span>&#10022;</span>Pilot</div>
+  </a>
+  <div class="nav-right">
+    <a href="/blog" class="nav-link active">Blog</a>
+    <a href="https://themeparkcopilot.com" class="nav-link">Home</a>
+    <a href="https://themeparkcopilot.com" class="nav-cta">Try free →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Park smarter</div>
+  <h1 class="hero-title">Tips, strategies,<br>and <em>real insights.</em></h1>
+  <p class="hero-sub">Everything your family needs to spend less time waiting and more time making memories — at Disneyland and Walt Disney World.</p>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" role="navigation" aria-label="Filter posts">
+  <a href="/blog" class="filter-pill active">All posts</a>
+  <a href="/blog/category/disneyland" class="filter-pill">Disneyland</a>
+  <a href="/blog/category/walt-disney-world" class="filter-pill">Walt Disney World</a>
+  <a href="/blog/category/planning-tips" class="filter-pill">Planning Tips</a>
+  <a href="/blog/category/lightning-lane" class="filter-pill">Lightning Lane</a>
+</div>
+
+<!-- POST GRID -->
+<main class="post-grid" role="main">
+
+  <!-- FEATURED -->
+  <a class="post-featured" href="/blog/disneyland-rope-drop-strategy">
+    <div class="featured-img">
+      <img src="https://images.unsplash.com/photo-1597466765242-3a00e9f0e7c6?w=900&q=80&fit=crop" alt="Families arriving at a theme park early in the morning for rope drop">
+      <div class="featured-img-overlay"></div>
+      <div class="featured-badge">Start here</div>
+    </div>
+    <div class="featured-body">
+      <div class="post-tag tag-dl">Disneyland · Strategy</div>
+      <h2 class="featured-title">Disneyland Rope Drop Strategy: How to Make the Most of Your Morning</h2>
+      <p class="featured-excerpt">The first hour at Disneyland is worth more than any other part of your day. Here's exactly how to use it — which rides to hit first, which lands to start in, and what most families get wrong before 10am.</p>
+      <div class="post-footer">
+        <span class="post-meta">8 min read</span>
+        <span class="read-more">Read the guide →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- CARD 1 -->
+  <a class="post-card" href="/blog/walt-disney-world-rope-drop-strategy">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=600&q=80&fit=crop" alt="Theme park castle at sunrise with clear blue sky">
+      <div class="card-img-overlay"></div>
+      <div class="card-tag-abs tag-abs-wdw">Walt Disney World</div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">Walt Disney World Rope Drop Strategy: Make the Most of Your Morning</h2>
+      <p class="card-excerpt">Four parks, one morning. Here's how to choose where to start and what to ride first at WDW.</p>
+      <div class="card-footer">
+        <span class="card-meta">7 min read</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- CARD 2 -->
+  <a class="post-card" href="/blog/how-to-use-lightning-lane-disneyland">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600&q=80&fit=crop" alt="A roller coaster at an amusement park on a sunny day">
+      <div class="card-img-overlay"></div>
+      <div class="card-tag-abs tag-abs-dl">Disneyland</div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">How to Use Lightning Lane at Disneyland (And Actually Get It Right)</h2>
+      <p class="card-excerpt">Most families waste their Lightning Lane selections on the wrong rides. Here's exactly how to use it.</p>
+      <div class="card-footer">
+        <span class="card-meta">6 min read</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- CARD 3 -->
+  <a class="post-card" href="/blog/how-to-use-lightning-lane-walt-disney-world">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1568564321006-ec01573b4726?w=600&q=80&fit=crop" alt="Families enjoying a theme park on a bright sunny day">
+      <div class="card-img-overlay"></div>
+      <div class="card-tag-abs tag-abs-wdw">Walt Disney World</div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">How to Use Lightning Lane at Walt Disney World</h2>
+      <p class="card-excerpt">WDW's Lightning Lane system is more complex than Disneyland's. Here's the complete breakdown.</p>
+      <div class="card-footer">
+        <span class="card-meta">7 min read</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- CARD 4 -->
+  <a class="post-card" href="/blog/disneyland-tips-first-timers">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&q=80&fit=crop" alt="A happy family on vacation at a theme park">
+      <div class="card-img-overlay"></div>
+      <div class="card-tag-abs tag-abs-dl">Disneyland</div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">Disneyland Tips for First Timers: Everything You Need to Know</h2>
+      <p class="card-excerpt">Going for the first time? These are the things nobody tells you until it's too late.</p>
+      <div class="card-footer">
+        <span class="card-meta">9 min read</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- CARD 5 -->
+  <a class="post-card" href="/blog/walt-disney-world-tips-first-timers">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1596483563977-e6f918e05c46?w=600&q=80&fit=crop" alt="Children excited at a theme park entrance">
+      <div class="card-img-overlay"></div>
+      <div class="card-tag-abs tag-abs-wdw">Walt Disney World</div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">Walt Disney World Tips for First Timers: Everything You Need to Know</h2>
+      <p class="card-excerpt">WDW is enormous and overwhelming for first timers. Here's what to know before you go.</p>
+      <div class="card-footer">
+        <span class="card-meta">9 min read</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- CARD 6 -->
+  <a class="post-card" href="/blog/how-to-plan-a-disneyland-trip">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=600&q=80&fit=crop" alt="Family planning a vacation together looking at a map">
+      <div class="card-img-overlay"></div>
+      <div class="card-tag-abs tag-abs-dl">Disneyland</div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">How to Plan a Disneyland Trip Without Getting Overwhelmed</h2>
+      <p class="card-excerpt">Step by step — from picking your dates to walking through the gates without stress.</p>
+      <div class="card-footer">
+        <span class="card-meta">10 min read</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- CARD 7 -->
+  <a class="post-card" href="/blog/how-to-plan-a-walt-disney-world-trip">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1541480601022-2308c0f02487?w=600&q=80&fit=crop" alt="Theme park at night with colorful lights">
+      <div class="card-img-overlay"></div>
+      <div class="card-tag-abs tag-abs-wdw">Walt Disney World</div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">How to Plan a Walt Disney World Trip Without Getting Overwhelmed</h2>
+      <p class="card-excerpt">WDW planning has more moving parts than any other vacation. Here's how to break it down.</p>
+      <div class="card-footer">
+        <span class="card-meta">10 min read</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </div>
+  </a>
+
+</main>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" aria-label="Newsletter signup">
+  <div>
+    <div class="newsletter-eyebrow">Stay in the know</div>
+    <div class="newsletter-title">Smarter days.<br><em>More magic.</em></div>
+  </div>
+  <form class="newsletter-form" action="https://disney-wait-times-lupt.vercel.app/api/subscribe" method="POST">
+    <input class="newsletter-input" type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+    <button class="newsletter-btn" type="submit">Get park tips →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-left">© 2026 Lunchbox Dad LLC · Theme Park Co-Pilot · hello@themeparkcopilot.com</div>
+  <div class="footer-right">
+    <a href="https://themeparkcopilot.com" class="footer-link">Home</a>
+    <a href="/blog" class="footer-link">Blog</a>
+    <a href="https://themeparkcopilot.com/privacy" class="footer-link">Privacy</a>
+    <a href="https://themeparkcopilot.com/terms" class="footer-link">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>
