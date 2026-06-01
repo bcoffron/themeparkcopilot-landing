@@ -313,6 +313,10 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
   .post-featured { grid-column: span 1; }
   .nav-right .nav-link { display: none; }
 }
+
+.filter-pill { cursor: pointer; background: transparent; border: 0.5px solid rgba(7,30,37,0.15); color: #4A7A7C; font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 700; padding: 6px 14px; border-radius: 100px; transition: all 0.15s; }
+.filter-pill:hover { background: #EEF5F4; }
+.filter-pill.active { background: #071E25; color: #fff; border-color: #071E25; }
 </style>
 </head>
 <body>
@@ -341,19 +345,19 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
 
 <!-- FILTER BAR -->
 <div class="filter-bar" role="navigation" aria-label="Filter posts">
-  <a href="/blog" class="filter-pill active">All posts</a>
-  <a href="/blog/category/disneyland" class="filter-pill">Disneyland</a>
-  <a href="/blog/category/walt-disney-world" class="filter-pill">Walt Disney World</a>
-  <a href="/blog/category/planning-tips" class="filter-pill">Planning Tips</a>
-  <a href="/blog/category/lightning-lane" class="filter-pill">Lightning Lane</a>
-  <a href="/blog/category/dining" class="filter-pill">Dining</a>
-  <a href="/blog/category/hotels" class="filter-pill">Hotels</a>
+  <button class="filter-pill active" data-filter="all">All posts</button>
+  <button class="filter-pill" data-filter="disneyland">Disneyland</button>
+  <button class="filter-pill" data-filter="walt-disney-world">Walt Disney World</button>
+  <button class="filter-pill" data-filter="planning-tips">Planning Tips</button>
+  <button class="filter-pill" data-filter="lightning-lane">Lightning Lane</button>
+  <button class="filter-pill" data-filter="dining">Dining</button>
+  <button class="filter-pill" data-filter="hotels">Hotels</button>
 </div>
 
 <!-- POST GRID -->
 <main class="post-grid" role="main">
 
-  <a class="post-featured" href="/blog/disneyland-rope-drop-strategy">
+  <a class="post-featured" href="/blog/disneyland-rope-drop-strategy" data-category="disneyland planning-tips">
     <div class="featured-img">
       <img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/dl-partners-castle.jpg" alt="Disneyland Rope Drop Strategy: How to Make the Most of Your Morning" style="object-position: center 45%;">
       <div class="featured-img-overlay"></div>
@@ -367,97 +371,97 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
     </div>
   </a>
 
-  <a class="post-card" href="/blog/best-time-to-visit-disneyland">
+  <a class="post-card" href="/blog/best-time-to-visit-disneyland" data-category="disneyland planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b2-best-time-dl.jpg" alt="Best Time to Visit Disneyland: Crowds, Prices, and What Nobody Tells You"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">Best Time to Visit Disneyland: Crowds, Prices, and What Nobody Tells You</h2><p class="card-excerpt">Real crowd data, the quietest months, and seasonal events worth planning around.</p><div class="card-footer"><span class="card-meta">8 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/disney-world-on-site-vs-off-site-hotels">
+  <a class="post-card" href="/blog/disney-world-on-site-vs-off-site-hotels" data-category="walt-disney-world hotels">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b3-hotels-wdw.jpg" alt="Disney World On-Site vs Off-Site Hotels: Which Is Worth It?"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Disney World On-Site vs Off-Site Hotels: Which Is Worth It?</h2><p class="card-excerpt">The honest breakdown of what you actually get — and when it's worth the extra cost.</p><div class="card-footer"><span class="card-meta">8 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/best-restaurants-disneyland">
+  <a class="post-card" href="/blog/best-restaurants-disneyland" data-category="disneyland dining">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b3-restaurants-dl.jpg" alt="Best Restaurants at Disneyland for Families"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">Best Restaurants at Disneyland for Families</h2><p class="card-excerpt">Quick service, table service, and everything worth a reservation at the Disneyland Resort.</p><div class="card-footer"><span class="card-meta">8 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/walt-disney-world-rope-drop-strategy">
+  <a class="post-card" href="/blog/walt-disney-world-rope-drop-strategy" data-category="walt-disney-world planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/wdw-lightning.jpg" alt="Walt Disney World Rope Drop Strategy: Make the Most of Your Morning"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Walt Disney World Rope Drop Strategy: Make the Most of Your Morning</h2><p class="card-excerpt">Four parks, one morning. Here's how to choose where to start and what to ride first.</p><div class="card-footer"><span class="card-meta">7 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/disneyland-on-site-vs-off-site-hotels">
+  <a class="post-card" href="/blog/disneyland-on-site-vs-off-site-hotels" data-category="disneyland hotels">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b3-hotels-dl.jpg" alt="Disneyland On-Site vs Off-Site Hotels: Which Is Worth It?"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">Disneyland On-Site vs Off-Site Hotels: Which Is Worth It?</h2><p class="card-excerpt">What staying on property actually gets you — and when a cheaper hotel nearby makes more sense.</p><div class="card-footer"><span class="card-meta">8 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/how-to-use-lightning-lane-disneyland">
+  <a class="post-card" href="/blog/how-to-use-lightning-lane-disneyland" data-category="disneyland lightning-lane">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/dl-lightning.jpg" alt="How to Use Lightning Lane at Disneyland (And Actually Get It Right)"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">How to Use Lightning Lane at Disneyland (And Actually Get It Right)</h2><p class="card-excerpt">Most families waste their Lightning Lane on the wrong rides. Here's exactly how to use it.</p><div class="card-footer"><span class="card-meta">6 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/disney-world-character-dining-guide">
+  <a class="post-card" href="/blog/disney-world-character-dining-guide" data-category="walt-disney-world dining">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b3-character-dining.jpg" alt="Walt Disney World Character Dining Guide"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Walt Disney World Character Dining Guide</h2><p class="card-excerpt">Which character meals are worth it, which to skip, and how to get a reservation.</p><div class="card-footer"><span class="card-meta">8 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/disneyland-vs-disney-world">
+  <a class="post-card" href="/blog/disneyland-vs-disney-world" data-category="disneyland walt-disney-world planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b2-dl-vs-wdw.jpg" alt="Disneyland vs. Walt Disney World: Which Resort Is Right for Your Family?"><div class="card-img-overlay"></div><div class="card-tag-abs" style="background:rgba(7,30,37,0.85);color:#fff;border:1px solid rgba(255,255,255,0.3);">Both Resorts</div></div>
     <div class="card-body"><h2 class="card-title">Disneyland vs. Walt Disney World: Which Resort Is Right for Your Family?</h2><p class="card-excerpt">Not "it depends." Here's which resort to choose based on your family's ages, budget, and trip length.</p><div class="card-footer"><span class="card-meta">9 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/disneyland-tips-first-timers">
+  <a class="post-card" href="/blog/disneyland-tips-first-timers" data-category="disneyland planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/dl-tips.jpg" alt="Disneyland Tips for First Timers: Everything You Need to Know"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">Disneyland Tips for First Timers: Everything You Need to Know</h2><p class="card-excerpt">Going for the first time? These are the things nobody tells you until it's too late.</p><div class="card-footer"><span class="card-meta">9 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/disney-world-dining-plan-worth-it">
+  <a class="post-card" href="/blog/disney-world-dining-plan-worth-it" data-category="walt-disney-world dining">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b3-dining-plan.jpg" alt="Is the Disney World Dining Plan Worth It?"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Is the Disney World Dining Plan Worth It?</h2><p class="card-excerpt">The math, the tradeoffs, and the honest answer most Disney sites won't give you.</p><div class="card-footer"><span class="card-meta">7 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/how-to-use-lightning-lane-walt-disney-world">
+  <a class="post-card" href="/blog/how-to-use-lightning-lane-walt-disney-world" data-category="walt-disney-world lightning-lane">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/wdw-tips.jpg" alt="How to Use Lightning Lane at Walt Disney World"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">How to Use Lightning Lane at Walt Disney World</h2><p class="card-excerpt">WDW's Lightning Lane system is more complex than Disneyland's. Here's the complete breakdown.</p><div class="card-footer"><span class="card-meta">7 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/best-snacks-disneyland">
+  <a class="post-card" href="/blog/best-snacks-disneyland" data-category="disneyland dining">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b3-snacks-dl.jpg" alt="Best Disneyland Snacks You Cannot Miss"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">Best Disneyland Snacks You Cannot Miss</h2><p class="card-excerpt">The churro is just the beginning. Here are the snacks worth planning your day around.</p><div class="card-footer"><span class="card-meta">6 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/walt-disney-world-tips-first-timers">
+  <a class="post-card" href="/blog/walt-disney-world-tips-first-timers" data-category="walt-disney-world planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/wdw-rope-drop.jpg" alt="Walt Disney World Tips for First Timers: Everything You Need to Know"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Walt Disney World Tips for First Timers: Everything You Need to Know</h2><p class="card-excerpt">WDW is enormous and overwhelming for first timers. Here's what to know before you go.</p><div class="card-footer"><span class="card-meta">9 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/disneyland-vs-disney-california-adventure">
+  <a class="post-card" href="/blog/disneyland-vs-disney-california-adventure" data-category="disneyland planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b2-dca-vs-dl.jpg" alt="Disneyland vs. Disney California Adventure: Which Park Should You Prioritize?"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">Disneyland vs. Disney California Adventure: Which Park Should You Prioritize?</h2><p class="card-excerpt">How to split your time at the Disneyland Resort — and which park to put first.</p><div class="card-footer"><span class="card-meta">7 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/best-restaurants-disney-world">
+  <a class="post-card" href="/blog/best-restaurants-disney-world" data-category="walt-disney-world dining">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/b3-restaurants-wdw.jpg" alt="Best Restaurants at Walt Disney World for Families"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Best Restaurants at Walt Disney World for Families</h2><p class="card-excerpt">The best quick service, table service, and splurge-worthy meals across all four parks.</p><div class="card-footer"><span class="card-meta">9 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/which-disney-world-park-should-you-visit-first">
+  <a class="post-card" href="/blog/which-disney-world-park-should-you-visit-first" data-category="walt-disney-world planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/wdw-tower-of-terror.jpg" alt="Which Walt Disney World Park Should You Visit First?"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Which Walt Disney World Park Should You Visit First?</h2><p class="card-excerpt">Four parks, one first day. Here's the right order for your family.</p><div class="card-footer"><span class="card-meta">8 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/how-to-plan-a-disneyland-trip">
+  <a class="post-card" href="/blog/how-to-plan-a-disneyland-trip" data-category="disneyland planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/dl-sleeping-beauty-blossoms.jpg" alt="How to Plan a Disneyland Trip Without Getting Overwhelmed"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-dl">Disneyland</div></div>
     <div class="card-body"><h2 class="card-title">How to Plan a Disneyland Trip Without Getting Overwhelmed</h2><p class="card-excerpt">Step by step — from picking your dates to walking through the gates without stress.</p><div class="card-footer"><span class="card-meta">10 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/best-time-to-visit-walt-disney-world">
+  <a class="post-card" href="/blog/best-time-to-visit-walt-disney-world" data-category="walt-disney-world planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/wdw-epcot-festival.jpg" alt="Best Time to Visit Walt Disney World: Crowds, Prices, and What Nobody Tells You"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">Best Time to Visit Walt Disney World: Crowds, Prices, and What Nobody Tells You</h2><p class="card-excerpt">September is the secret weapon most families don't know about. Here's the full breakdown.</p><div class="card-footer"><span class="card-meta">8 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
 
-  <a class="post-card" href="/blog/how-to-plan-a-walt-disney-world-trip">
+  <a class="post-card" href="/blog/how-to-plan-a-walt-disney-world-trip" data-category="walt-disney-world planning-tips">
     <div class="card-img"><img src="https://raw.githubusercontent.com/bcoffron/themeparkcopilot-landing/main/blog/images/wdw-plan.jpg" alt="How to Plan a Walt Disney World Trip Without Getting Overwhelmed"><div class="card-img-overlay"></div><div class="card-tag-abs tag-abs-wdw">Walt Disney World</div></div>
     <div class="card-body"><h2 class="card-title">How to Plan a Walt Disney World Trip Without Getting Overwhelmed</h2><p class="card-excerpt">WDW planning has more moving parts than any other vacation. Here's how to break it down.</p><div class="card-footer"><span class="card-meta">10 min read</span><span class="card-read">Read &rarr;</span></div></div>
   </a>
@@ -488,5 +492,32 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
   </div>
 </footer>
 
+
+<script>
+(function() {
+  const pills = document.querySelectorAll('.filter-pill');
+  const cards = document.querySelectorAll('.post-card, .post-featured');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', function() {
+      const filter = this.dataset.filter;
+
+      // Update active pill
+      pills.forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+
+      // Show/hide cards
+      cards.forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          const cats = card.dataset.category || '';
+          card.style.display = cats.includes(filter) ? '' : 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
