@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!-- ======================================================
+     PASTE YOUR META DATA BELOW
+     ====================================================== -->
+<title>POST TITLE HERE — Theme Park Co-Pilot</title>
+<meta name="description" content="META DESCRIPTION HERE — 150-155 characters including primary keyword.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://themeparkcopilot.com/blog/POST-SLUG-HERE">
+<meta property="og:title" content="POST TITLE HERE — Theme Park Co-Pilot">
+<meta property="og:description" content="META DESCRIPTION HERE">
+<meta property="og:image" content="HERO IMAGE URL HERE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="POST TITLE HERE — Theme Park Co-Pilot">
+<meta name="twitter:description" content="META DESCRIPTION HERE">
+<meta name="twitter:image" content="HERO IMAGE URL HERE">
+<link rel="canonical" href="https://themeparkcopilot.com/blog/POST-SLUG-HERE">
+<!-- ====================================================== -->
+<link rel="icon" type="image/png" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
+<link rel="apple-touch-icon" href="https://app.themeparkcopilot.com/assets/brand/favicon.PNG">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700;1,900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Schema — Article -->
+<!-- ======================================================
+     PASTE YOUR SCHEMA DATA BELOW
+     ====================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "POST TITLE HERE",
+  "description": "META DESCRIPTION HERE",
+  "image": "HERO IMAGE URL HERE",
+  "datePublished": "YYYY-MM-DD",
+  "dateModified": "YYYY-MM-DD",
+  "author": {
+    "@type": "Organization",
+    "name": "Theme Park Co-Pilot Team",
+    "url": "https://themeparkcopilot.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Theme Park Co-Pilot",
+    "url": "https://themeparkcopilot.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://app.themeparkcopilot.com/assets/brand/logo-primary.svg"
+    }
+  }
+}
+</script>
+<!-- ====================================================== -->
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+.nav {
+  background: #071E25; height: 56px;
+  display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.nav-left { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-icon { width: 30px; height: 30px; border-radius: 7px; overflow: hidden; border: 1px solid rgba(212,168,48,0.3); flex-shrink: 0; }
+.nav-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nav-wordmark { font-size: 13px; font-weight: 800; color: #fff; letter-spacing: -0.2px; }
+.nav-wordmark span { color: #F5A623; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-link { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); text-decoration: none; }
+.nav-cta { font-size: 11px; font-weight: 700; color: #071E25; background: #F5A623; padding: 7px 16px; border-radius: 100px; text-decoration: none; }
+
+/* HERO IMAGE */
+.post-hero {
+  width: 100%; height: 380px; overflow: hidden; position: relative;
+}
+.post-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.post-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(7,30,37,0.65) 0%, transparent 55%);
+}
+.post-hero-tag {
+  position: absolute; bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  padding: 4px 12px; border-radius: 100px;
+  white-space: nowrap;
+}
+.tag-dl { background: rgba(26,104,96,0.92); color: #E0F5EE; }
+.tag-wdw { background: rgba(184,134,11,0.92); color: #FFF8E0; }
+
+/* ARTICLE LAYOUT */
+.article-wrap {
+  max-width: 760px; margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+/* POST HEADER */
+.post-header { margin-bottom: 32px; }
+.post-category {
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  margin-bottom: 10px;
+}
+.cat-dl { color: #1A6860; }
+.cat-wdw { color: #B8860B; }
+.post-title {
+  font-family: 'Fraunces', serif;
+  font-size: 38px; font-weight: 900;
+  color: #071E25; line-height: 1.1;
+  letter-spacing: -0.5px; margin-bottom: 14px;
+}
+.post-intro {
+  font-size: 17px; color: #4A7A7C;
+  line-height: 1.6; margin-bottom: 16px;
+  font-weight: 400;
+}
+.post-byline {
+  font-size: 10px; color: #8AACAE;
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 20px;
+  border-bottom: 0.5px solid rgba(7,30,37,0.10);
+}
+.byline-dot { width: 3px; height: 3px; border-radius: 50%; background: #8AACAE; }
+
+/* ARTICLE BODY */
+.article-body { font-size: 15px; line-height: 1.75; color: #2A4A50; }
+.article-body h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 24px; font-weight: 900;
+  color: #071E25; line-height: 1.15;
+  letter-spacing: -0.2px;
+  margin: 36px 0 14px;
+}
+.article-body h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: #071E25; margin: 24px 0 10px;
+}
+.article-body p { margin-bottom: 18px; }
+.article-body ul, .article-body ol {
+  padding-left: 20px; margin-bottom: 18px;
+}
+.article-body li { margin-bottom: 8px; }
+.article-body strong { font-weight: 700; color: #071E25; }
+.article-body a { color: #1A6860; text-decoration: underline; }
+.article-body a:hover { color: #0F4A44; }
+
+/* INLINE IMAGE */
+.article-img {
+  width: 100%; border-radius: 10px;
+  overflow: hidden; margin: 28px 0;
+}
+.article-img img { width: 100%; display: block; object-fit: cover; }
+.article-img figcaption {
+  font-size: 10px; color: #8AACAE;
+  padding: 8px 0 0; text-align: center;
+}
+
+/* CALLOUT BOX */
+.callout {
+  background: #fff;
+  border-left: 3px solid #1A6860;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px; margin: 24px 0;
+}
+.callout p { margin: 0; font-size: 14px; color: #2A4A50; }
+
+/* FAQ */
+.faq { margin-top: 40px; }
+.faq-title {
+  font-family: 'Fraunces', serif;
+  font-size: 24px; font-weight: 900;
+  color: #071E25; margin-bottom: 20px;
+}
+.faq-item {
+  background: #fff;
+  border-radius: 10px;
+  border: 0.5px solid rgba(7,30,37,0.07);
+  padding: 16px 18px; margin-bottom: 10px;
+}
+.faq-q {
+  font-size: 13px; font-weight: 700;
+  color: #071E25; margin-bottom: 8px;
+}
+.faq-a { font-size: 13px; color: #4A7A7C; line-height: 1.6; }
+
+/* AUTHOR BIO */
+.author-bio {
+  background: #fff;
+  border-radius: 12px;
+  border: 0.5px solid rgba(7,30,37,0.07);
+  padding: 18px 20px; margin: 40px 0;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #071E25; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.author-name { font-size: 12px; font-weight: 700; color: #071E25; margin-bottom: 4px; }
+.author-text { font-size: 11px; color: #4A7A7C; line-height: 1.5; }
+
+/* CTA BOX */
+.cta-box {
+  background: #071E25;
+  border-radius: 14px; padding: 24px 28px;
+  margin: 40px 0; text-align: center;
+}
+.cta-eyebrow {
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: #F5A623; margin-bottom: 8px;
+}
+.cta-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 900;
+  color: #fff; line-height: 1.1; margin-bottom: 8px;
+}
+.cta-title em { color: #F5A623; font-style: italic; }
+.cta-sub { font-size: 12px; color: rgba(255,255,255,0.50); margin-bottom: 18px; line-height: 1.5; }
+.cta-btn {
+  display: inline-block;
+  background: #C86030; color: #fff;
+  font-size: 12px; font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  padding: 11px 24px; border-radius: 100px;
+  text-decoration: none;
+}
+
+/* RELATED POSTS */
+.related { margin-top: 48px; padding-top: 32px; border-top: 0.5px solid rgba(7,30,37,0.10); }
+.related-title {
+  font-family: 'Fraunces', serif;
+  font-size: 20px; font-weight: 900;
+  color: #071E25; margin-bottom: 16px;
+}
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.related-card {
+  background: #fff; border-radius: 10px;
+  border: 0.5px solid rgba(7,30,37,0.07);
+  padding: 14px 16px; text-decoration: none;
+  transition: transform 0.15s;
+}
+.related-card:hover { transform: translateY(-2px); }
+.related-card-tag { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+.related-card-title { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 900; color: #071E25; line-height: 1.2; }
+
+/* FOOTER */
+.footer {
+  background: #071E25; padding: 20px 40px;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.footer-left { font-size: 10px; color: rgba(255,255,255,0.30); }
+.footer-right { display: flex; gap: 16px; }
+.footer-link { font-size: 10px; color: rgba(255,255,255,0.30); text-decoration: none; }
+.footer-link:hover { color: rgba(255,255,255,0.60); }
+
+@media (max-width: 700px) {
+  .article-wrap { padding: 32px 18px 48px; }
+  .post-title { font-size: 28px; }
+  .post-hero { height: 240px; }
+  .related-grid { grid-template-columns: 1fr; }
+  .nav { padding: 0 20px; }
+  .nav-right .nav-link { display: none; }
+  .footer { padding: 16px 20px; flex-direction: column; gap: 10px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a href="https://themeparkcopilot.com" class="nav-left">
+    <div class="nav-icon">
+      <img src="https://app.themeparkcopilot.com/assets/brand/favicon.PNG" alt="Theme Park Co-Pilot">
+    </div>
+    <div class="nav-wordmark">Theme Park Co<span>&#10022;</span>Pilot</div>
+  </a>
+  <div class="nav-right">
+    <a href="/blog" class="nav-link">Blog</a>
+    <a href="https://themeparkcopilot.com" class="nav-link">Home</a>
+    <a href="https://themeparkcopilot.com" class="nav-cta">Try free →</a>
+  </div>
+</nav>
+
+<!-- ======================================================
+     HERO IMAGE
+     Replace src with your Unsplash URL or real photo
+     Replace alt with descriptive alt text
+     Replace class on .post-hero-tag: tag-dl OR tag-wdw
+     Replace tag text: Disneyland OR Walt Disney World
+     ====================================================== -->
+<div class="post-hero">
+  <img src="HERO_IMAGE_URL_HERE" alt="ALT TEXT HERE">
+  <div class="post-hero-overlay"></div>
+  <div class="post-hero-tag tag-dl">DISNEYLAND OR WALT DISNEY WORLD</div>
+</div>
+<!-- ====================================================== -->
+
+<article class="article-wrap" itemscope itemtype="https://schema.org/Article">
+
+  <!-- POST HEADER -->
+  <header class="post-header">
+    <!-- ======================================================
+         REPLACE: category class (cat-dl or cat-wdw), category text, title, intro paragraph, byline
+         ====================================================== -->
+    <div class="post-category cat-dl">Disneyland · Strategy</div>
+    <h1 class="post-title" itemprop="headline">POST TITLE HERE</h1>
+    <p class="post-intro">OPENING PARAGRAPH HERE — answer the main question directly. This is the most important paragraph for AI search. Be specific and confident.</p>
+    <div class="post-byline">
+      <span>By the Theme Park Co-Pilot Team</span>
+      <span class="byline-dot"></span>
+      <span>MONTH DD, YYYY</span>
+      <span class="byline-dot"></span>
+      <span>N min read</span>
+    </div>
+    <!-- ====================================================== -->
+  </header>
+
+  <!-- ARTICLE BODY -->
+  <!-- ======================================================
+       DROP YOUR FULL POST CONTENT BELOW
+       Use: <h2> for main sections (question format preferred)
+            <h3> for subsections
+            <p> for paragraphs
+            <ul> / <ol> for lists
+            <strong> for key facts and numbers
+       ====================================================== -->
+  <div class="article-body" itemprop="articleBody">
+
+    <p>BODY CONTENT STARTS HERE. Write in full paragraphs. Each <strong>specific fact or number</strong> should be bolded for scannability and AI citation.</p>
+
+    <h2>What time should you arrive for rope drop?</h2>
+    <p>SECTION CONTENT HERE.</p>
+
+    <!-- INLINE IMAGE EXAMPLE — replace src and alt -->
+    <figure class="article-img">
+      <img src="INLINE_IMAGE_URL_HERE" alt="ALT TEXT HERE">
+      <figcaption>CAPTION HERE — optional, delete if not needed</figcaption>
+    </figure>
+
+    <h2>NEXT SECTION HEADING HERE</h2>
+    <p>SECTION CONTENT HERE.</p>
+
+    <!-- CALLOUT BOX — use for key tips -->
+    <div class="callout">
+      <p><strong>Pro tip:</strong> CALLOUT TEXT HERE — a single key insight worth highlighting.</p>
+    </div>
+
+    <h2>NEXT SECTION HEADING HERE</h2>
+    <p>SECTION CONTENT HERE.</p>
+
+    <h2>NEXT SECTION HEADING HERE</h2>
+    <p>SECTION CONTENT HERE.</p>
+
+  </div>
+  <!-- ====================================================== -->
+
+  <!-- CTA BOX — Disneyland version (swap for WDW version if needed) -->
+  <div class="cta-box">
+    <div class="cta-eyebrow">Theme Park Co-Pilot</div>
+    <div class="cta-title">Smarter days.<br><em>More magic.</em></div>
+    <p class="cta-sub">Planning a Disneyland trip shouldn't feel like a second job. Theme Park Co-Pilot builds your day, watches live wait times, and helps your whole group make the next best move — all day long.</p>
+    <a class="cta-btn" href="https://themeparkcopilot.com">Try free for 7 days →</a>
+  </div>
+
+  <!-- FAQ SECTION -->
+  <!-- ======================================================
+       REPLACE: all FAQ questions and answers
+       4-5 questions per post. Use real questions families ask.
+       Keep answers 2-4 sentences. These feed AI search results.
+       ====================================================== -->
+  <div class="faq" itemscope itemtype="https://schema.org/FAQPage">
+    <h2 class="faq-title">Frequently asked questions</h2>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">FAQ QUESTION 1 HERE?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">FAQ ANSWER 1 HERE. Be specific and direct. 2-4 sentences.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">FAQ QUESTION 2 HERE?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">FAQ ANSWER 2 HERE.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">FAQ QUESTION 3 HERE?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">FAQ ANSWER 3 HERE.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">FAQ QUESTION 4 HERE?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">FAQ ANSWER 4 HERE.</span>
+      </div>
+    </div>
+
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="faq-q" itemprop="name">FAQ QUESTION 5 HERE?</div>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">FAQ ANSWER 5 HERE.</span>
+      </div>
+    </div>
+
+  </div>
+  <!-- ====================================================== -->
+
+  <!-- AUTHOR BIO -->
+  <div class="author-bio" itemprop="author" itemscope itemtype="https://schema.org/Organization">
+    <div class="author-avatar">
+      <img src="https://app.themeparkcopilot.com/assets/brand/favicon.PNG" alt="Theme Park Co-Pilot">
+    </div>
+    <div>
+      <div class="author-name" itemprop="name">Theme Park Co-Pilot Team</div>
+      <div class="author-text">Disney planning obsessives who have spent thousands of hours studying wait time patterns, crowd behavior, and park strategy so your family doesn't have to. We built Theme Park Co-Pilot because we believe a great park day shouldn't require a spreadsheet.</div>
+    </div>
+  </div>
+
+  <!-- RELATED POSTS -->
+  <!-- ======================================================
+       REPLACE: href, tag class, tag text, and title for each related post
+       Pick 2 posts that are genuinely related to this one
+       ====================================================== -->
+  <nav class="related" aria-label="Related posts">
+    <h2 class="related-title">Keep reading</h2>
+    <div class="related-grid">
+      <a class="related-card" href="/blog/RELATED-POST-SLUG-1">
+        <div class="related-card-tag tag-dl">Disneyland</div>
+        <div class="related-card-title">RELATED POST TITLE 1</div>
+      </a>
+      <a class="related-card" href="/blog/RELATED-POST-SLUG-2">
+        <div class="related-card-tag tag-wdw">Walt Disney World</div>
+        <div class="related-card-title">RELATED POST TITLE 2</div>
+      </a>
+    </div>
+  </nav>
+  <!-- ====================================================== -->
+
+</article>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-left">© 2026 Lunchbox Dad LLC · Theme Park Co-Pilot · hello@themeparkcopilot.com</div>
+  <div class="footer-right">
+    <a href="https://themeparkcopilot.com" class="footer-link">Home</a>
+    <a href="/blog" class="footer-link">Blog</a>
+    <a href="https://themeparkcopilot.com/privacy" class="footer-link">Privacy</a>
+    <a href="https://themeparkcopilot.com/terms" class="footer-link">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>
