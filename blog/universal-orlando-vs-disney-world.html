@@ -85,7 +85,19 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
 .tag-wdw { background: rgba(184,134,11,0.92); color: #FFF8E0; }
 .tag-abs-wdw { background: rgba(184,134,11,0.92); color: #FFF8E0; }
 .tag-abs-dl { background: rgba(26,104,96,0.92); color: #E0F5EE; }
-.tag-both { background: rgba(7,30,37,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.3); }</style>
+.tag-both { background: rgba(7,30,37,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+.share-bar { margin: 40px 0 0; padding: 24px 0 0; border-top: 0.5px solid rgba(7,30,37,0.10); }
+.share-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #8AACAE; margin-bottom: 12px; }
+.share-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 100px; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; transition: opacity 0.15s; }
+.share-btn:hover { opacity: 0.85; }
+.share-btn svg { flex-shrink: 0; }
+.share-btn-facebook { background: #1877F2; color: #fff; }
+.share-btn-x { background: #000; color: #fff; }
+.share-btn-pinterest { background: #E60023; color: #fff; }
+.share-btn-copy { background: #EEF5F4; color: #071E25; border: 0.5px solid rgba(7,30,37,0.12); }
+.share-btn-copy.copied { background: #1A6860; color: #fff; border-color: #1A6860; }
+</style>
 </head>
 <body>
 <nav class="nav" role="navigation">
@@ -288,6 +300,27 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
       </div>
     </div>
   </div>
+  <div class="share-bar">
+    <div class="share-label">Share this post</div>
+    <div class="share-buttons">
+      <a class="share-btn share-btn-facebook" id="share-facebook" href="#" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a class="share-btn share-btn-x" id="share-x" href="#" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X
+      </a>
+      <a class="share-btn share-btn-pinterest" id="share-pinterest" href="#" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        Pinterest
+      </a>
+      <button class="share-btn share-btn-copy" id="share-copy" onclick="copyPostLink(this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span id="copy-label">Copy link</span>
+      </button>
+    </div>
+  </div>
   <div class="author-bio">
     <div class="author-avatar"><img src="https://app.themeparkcopilot.com/assets/brand/favicon.PNG" alt="Theme Park Co-Pilot"></div>
     <div>
@@ -317,5 +350,32 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
     <a href="https://themeparkcopilot.com/terms" class="footer-link">Terms</a>
   </div>
 </footer>
+<script>
+(function() {
+  var url = window.location.href;
+  var title = document.querySelector('h1') ? document.querySelector('h1').textContent.trim() : document.title;
+  var img = document.querySelector('.post-hero img') ? document.querySelector('.post-hero img').src : '';
+
+  var fb = document.getElementById('share-facebook');
+  if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+
+  var x = document.getElementById('share-x');
+  if (x) x.href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(title + ' — Theme Park Co-Pilot');
+
+  var pin = document.getElementById('share-pinterest');
+  if (pin) pin.href = 'https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(url) + '&media=' + encodeURIComponent(img) + '&description=' + encodeURIComponent(title);
+})();
+
+function copyPostLink(btn) {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    btn.classList.add('copied');
+    document.getElementById('copy-label').textContent = 'Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      document.getElementById('copy-label').textContent = 'Copy link';
+    }, 2000);
+  });
+}
+</script>
 </body>
 </html>
