@@ -119,6 +119,18 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
 .tag-abs-wdw { background: rgba(184,134,11,0.92); color: #FFF8E0; }
 .tag-abs-dl { background: rgba(26,104,96,0.92); color: #E0F5EE; }
 .tag-both { background: rgba(7,30,37,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+
+.share-bar { margin: 40px 0 0; padding: 24px 0 0; border-top: 0.5px solid rgba(7,30,37,0.10); }
+.share-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #8AACAE; margin-bottom: 12px; }
+.share-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 100px; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; transition: opacity 0.15s; }
+.share-btn:hover { opacity: 0.85; }
+.share-btn svg { flex-shrink: 0; }
+.share-btn-facebook { background: #1877F2; color: #fff; }
+.share-btn-x { background: #000; color: #fff; }
+.share-btn-pinterest { background: #E60023; color: #fff; }
+.share-btn-copy { background: #EEF5F4; color: #071E25; border: 0.5px solid rgba(7,30,37,0.12); }
+.share-btn-copy.copied { background: #1A6860; color: #fff; border-color: #1A6860; }
 </style>
 </head>
 <body>
@@ -307,5 +319,32 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
     <a href="https://themeparkcopilot.com/terms" class="footer-link">Terms</a>
   </div>
 </footer>
+<script>
+(function() {
+  var url = window.location.href;
+  var title = document.querySelector('h1') ? document.querySelector('h1').textContent.trim() : document.title;
+  var img = document.querySelector('.post-hero img') ? document.querySelector('.post-hero img').src : '';
+
+  var fb = document.getElementById('share-facebook');
+  if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+
+  var x = document.getElementById('share-x');
+  if (x) x.href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(title + ' — Theme Park Co-Pilot');
+
+  var pin = document.getElementById('share-pinterest');
+  if (pin) pin.href = 'https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(url) + '&media=' + encodeURIComponent(img) + '&description=' + encodeURIComponent(title);
+})();
+
+function copyPostLink(btn) {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    btn.classList.add('copied');
+    document.getElementById('copy-label').textContent = 'Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      document.getElementById('copy-label').textContent = 'Copy link';
+    }, 2000);
+  });
+}
+</script>
 </body>
 </html>
