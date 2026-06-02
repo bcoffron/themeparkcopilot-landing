@@ -131,6 +131,11 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
 .share-btn-pinterest { background: #E60023; color: #fff; }
 .share-btn-copy { background: #EEF5F4; color: #071E25; border: 0.5px solid rgba(7,30,37,0.12); }
 .share-btn-copy.copied { background: #1A6860; color: #fff; border-color: #1A6860; }
+.share-btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+.share-tooltip { position: relative; }
+.share-tooltip-text { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #071E25; color: #fff; font-size: 10px; font-weight: 600; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 10; }
+.share-tooltip-text::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #071E25; }
+.share-tooltip.show-tip .share-tooltip-text { display: block; }
 </style>
 </head>
 <body>
@@ -307,6 +312,14 @@ body { font-family: 'Outfit', sans-serif; background: #EEF5F4; color: #071E25; -
   if (pin) pin.href = 'https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(url) + '&media=' + encodeURIComponent(img) + '&description=' + encodeURIComponent(title);
 })();
 
+
+function shareToInstagram() {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    var tooltip = document.getElementById('ig-tooltip');
+    tooltip.classList.add('show-tip');
+    setTimeout(function() { tooltip.classList.remove('show-tip'); }, 3000);
+  });
+}
 function copyPostLink(btn) {
   navigator.clipboard.writeText(window.location.href).then(function() {
     btn.classList.add('copied');
